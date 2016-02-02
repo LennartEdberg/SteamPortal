@@ -7,13 +7,21 @@
 <html>
 <head>
     <title>Steam Portal</title>
+<link rel="stylesheet" href="css/style.css">
+<link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet' type='text/css'>
 </head>
 <body>
 <?php
 if(!isset($_SESSION['steamid'])) {
-    echo "Welcome! please login \n \n";
-    steamlogin(); //login button
 
+
+    $content .= '<div id="wrapper">';
+    $content .= '<h1>Welcome!</h1>';
+    $content .= '<h1>Please sign in to retrieve your profile</h1>';
+    $content .= '</div>';
+    echo $content;
+
+    steamlogin(); //login button
 }  else {
     include ('steamauth/userInfo.php');
     //Protected content

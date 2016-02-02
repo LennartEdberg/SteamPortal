@@ -23,7 +23,7 @@ try {
             $openid->identity = 'http://steamcommunity.com/openid';
             header('Location: ' . $openid->authUrl());
         }
-    echo "<form action=\"?login\" method=\"post\"> <input type=\"image\" src=\"http://cdn.steamcommunity.com/public/images/signinthroughsteam/sits_".$button.".png\"></form>";
+    echo "<form action=\"?login\" method=\"post\"> <input id=\"sign-in-btn\" type=\"image\" src=\"http://cdn.steamcommunity.com/public/images/signinthroughsteam/sits_".$button.".png\"></form>";
 }
 
      elseif($openid->mode == 'cancel') {

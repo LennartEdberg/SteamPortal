@@ -1,0 +1,25 @@
+*
+{
+    margin: 0px;
+    padding: 0px;
+}
+
+body
+{
+    background-color: #2a2939;
+    font-family: 'Montserrat', sans-serif;
+}
+
+#wrapper
+{
+    text-align: center;
+    margin: 0 auto;
+    font-size: 24px;
+    margin-top: calc(50vh - 167px); /* Totalla summan av texternashöjd + knappenshöjd */
+}
+
+#sign-in-btn
+{
+    display: block;
+    margin: 0 auto;
+}
