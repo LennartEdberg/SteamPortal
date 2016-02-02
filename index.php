@@ -25,9 +25,9 @@ if(!isset($_SESSION['steamid'])) {
 }  else {
     include ('steamauth/userInfo.php');
     //Protected content
-    echo "Welcome back " . $steamprofile['personaname'] . "</br>";
-    echo "here is your avatar: </br>" . '<img src="'.$steamprofile['avatarfull'].'" title="" alt="" />'; // Display their avatar!
-
+    $content .= '<img id="profile_picture" src="'.$steamprofile['avatarfull'].'" title="" alt="" />';
+    $content .="<h2>Welcome " . $steamprofile['personaname'] . "</h2>";
+    echo $content;
     logoutbutton();
 }
 ?>

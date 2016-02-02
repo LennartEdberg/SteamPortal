@@ -23,3 +23,9 @@ body
     display: block;
     margin: 0 auto;
 }
+
+#profile_picture
+{
+    border-radius: 10px;
+    width: 60px;
+}
