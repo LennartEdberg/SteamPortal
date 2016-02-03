@@ -29,3 +29,9 @@ body
     border-radius: 10px;
     width: 60px;
 }
+
+#sidebar
+{
+    width: 200px;
+    background-color: #fff;
+}

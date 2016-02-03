@@ -3,10 +3,6 @@ ob_start();
 session_start();
 require ('openid.php');
 
-function logoutbutton() {
-    echo "<form action=\"steamauth/logout.php\" method=\"post\"><input value=\"Logout\" type=\"submit\" /></form>"; //logout button
-}
-
 function steamlogin()
 {
 try {
@@ -23,7 +19,6 @@ try {
             $openid->identity = 'http://steamcommunity.com/openid';
             header('Location: ' . $openid->authUrl());
         }
-    echo "<form action=\"?login\" method=\"post\"> <input id=\"sign-in-btn\" type=\"image\" src=\"http://cdn.steamcommunity.com/public/images/signinthroughsteam/sits_".$button.".png\"></form>";
 }
 
      elseif($openid->mode == 'cancel') {
