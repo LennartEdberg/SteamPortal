@@ -31,6 +31,15 @@ header form h2 {
     margin-left: 5%;
     color: #188dce;
     font-weight: 400;
+    -webkit-transition: all 0.4s ease-in-out;
+    -moz-transition: all 0.4s ease-in-out;
+    -o-transition: all 0.4s ease-in-out;
+    transition: all 0.4s ease-in-out;
+    cursor: pointer;
+}
+
+header form h2:hover {
+    color: #00a4ff;
 }
 
 header form #sign-in-btn
