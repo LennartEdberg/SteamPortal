@@ -46,8 +46,9 @@ if(!isset($_SESSION['steamid'])) {
     $content .= '<img id="profile_picture" src="'.$steamprofile['avatarfull'].'" title="" alt="" />';
     $content .="<h2>Welcome " . $steamprofile['personaname'] . "</h2>";
     $content .= "<form action=\"steamauth/logout.php\" method=\"post\"><input value=\"Logout\" type=\"submit\" /></form>";
+    $content .= "<h3 style='margin-top: 10px;'>Friends</h3>";
     foreach ($steamprofile['friendlist'] as $key=>$friend) {
-        $content .= 'SteamName: ' . $friendListArray[$key]['personaname'] . '<br />';
+        $content .= 'Name: <span style="color: #722424;">' . $friendListArray[$key]['personaname'] . '</span><span><img style="width: 30px; border-radius: 5px; vertical-align: middle; margin-left: 5px;" src="'.$friendListArray[$key]['avatarfull'].'" title="" alt="" /><br />';
     }
     $content .= '</div>';
     echo $content;
