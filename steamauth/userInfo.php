@@ -26,7 +26,7 @@
         }
         $_SESSION['steam_primaryclanid'] = $content['response']['players'][0]['primaryclanid'];
         $_SESSION['steam_timecreated'] = $content['response']['players'][0]['timecreated'];
-        $_SESSION['steam_uptodate'] == true;
+        $_SESSION['steam_uptodate'] == false;
     }
 
     $steamprofile['friendlist'] = $_SESSION['steam_friendslist'];
