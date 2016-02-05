@@ -7,54 +7,71 @@
 <html>
 <head>
     <title>Steam Portal</title>
-<link rel="stylesheet" href="css/style.css">
-<link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet' type='text/css'>
-</head>
+    <link rel="stylesheet" href="css/normalize.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet' type='text/css'>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+    </head>
 <body>
-<?php
-if(!isset($_SESSION['steamid'])) {
-    $content = '';
-    $content .= '<div id="wrapper">';
-    $content .= '<h1>Welcome!</h1>';
-    $content .= '<h1>Please sign in to retrieve your profile</h1>';
-    $content .= '</div>';
-    $content .= "<form action=\"?login\" method=\"post\"> <input id=\"sign-in-btn\" type=\"image\" src=\"http://steamcommunity-a.akamaihd.net/public/images/signinthroughsteam/sits_large_noborder.png\"></form>";
-    echo $content;
-    steamlogin(); //login button
-}  else {
-    include ('steamauth/userInfo.php');
-    //Protected content
 
-    $friendlistLength = count($steamprofile['friendlist']);
-    $id = 1;
-    foreach($steamprofile['friendlist'] as $friend)
-    {
-        if($id >= $friendlistLength)
+<header>
+    <?php
+    if(!isset($_SESSION['steamid'])) {
+        $content = '';
+        $content .= "<form action=\"?login\" method=\"post\" id=\"login-form\"> <input id=\"sign-in-btn\" type=\"image\" src=\"http://steamcommunity-a.akamaihd.net/public/images/signinthroughsteam/sits_large_noborder.png\"><h2>SteamPortal</h2></form>";
+        echo $content;
+        steamlogin(); //login button
+    }  else {
+        include ('steamauth/userInfo.php');
+        //Protected content
+
+        $friendlistLength = count($steamprofile['friendlist']);
+        $id = 1;
+        foreach($steamprofile['friendlist'] as $friend)
         {
-            $steamfriendIDs .= $friend['steamid'];
+            if($id >= $friendlistLength)
+            {
+                $steamfriendIDs .= $friend['steamid'];
 
-        } else{
-            $steamfriendIDs .= $friend['steamid'] . ',%20';
+            } else{
+                $steamfriendIDs .= $friend['steamid'] . ',%20';
+            }
+            $id++;
         }
-        $id++;
+
+        $friendListArray = getSteamNames($steamfriendIDs);
+
+        $content = '';
+        $content .= '<div id="sidebar">';
+        $content .= '<img id="profile_picture" src="'.$steamprofile['avatarfull'].'" title="" alt="" />';
+        $content .="<h2>Welcome " . $steamprofile['personaname'] . "</h2>";
+        $content .= "<form action=\"steamauth/logout.php\" method=\"post\"><input value=\"Logout\" type=\"submit\" /></form>";
+        foreach ($steamprofile['friendlist'] as $key=>$friend) {
+            $content .= 'SteamName: ' . $friendListArray[$key]['personaname'] . '<br />';
+        }
+        $content .= '</div>';
+        echo $content;
+
+
+
     }
+    ?>
+</header>
 
-    $friendListArray = getSteamNames($steamfriendIDs);
+<section id="intro-container">
+    <h1 class="intro-headerText">The ultimate way to interact with your friends on steam</h1>
+    <a href="#friends-container"><button>HOW IT WORKS</button></a>
+</section>
+    
+<section id="friends-container">
+    <div class="friends-text">
+        <h2>Easy to communicate with your friends in a private chat and group chats</h2>
+    </div>
+    <figure class="friends-img">
+        <img src="img/friendsList.png">
+    </figure>
+</section>
 
-    $content = '';
-    $content .= '<div id="sidebar">';
-    $content .= '<img id="profile_picture" src="'.$steamprofile['avatarfull'].'" title="" alt="" />';
-    $content .="<h2>Welcome " . $steamprofile['personaname'] . "</h2>";
-    $content .= "<form action=\"steamauth/logout.php\" method=\"post\"><input value=\"Logout\" type=\"submit\" /></form>";
-    foreach ($steamprofile['friendlist'] as $key=>$friend) {
-        $content .= 'SteamName: ' . $friendListArray[$key]['personaname'] . '<br />';
-    }
-    $content .= '</div>';
-    echo $content;
-
-
-
-}
-?>
+<script src="js/script.js"></script>
 </body>
 </html>
