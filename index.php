@@ -36,6 +36,7 @@ if(!isset($_SESSION['steamid'])) {
         } else{
             $steamfriendIDs .= $friend['steamid'] . ',%20';
         }
+
         $id++;
     }
 
@@ -46,8 +47,18 @@ if(!isset($_SESSION['steamid'])) {
     $content .= '<img id="profile_picture" src="'.$steamprofile['avatarfull'].'" title="" alt="" />';
     $content .="<h2>Welcome " . $steamprofile['personaname'] . "</h2>";
     $content .= "<form action=\"steamauth/logout.php\" method=\"post\"><input value=\"Logout\" type=\"submit\" /></form>";
+    $content .= '</div>';
+    $content .= '<div id="friendlist">';
+    $content .= '<h1 id="friendHeader">Friendslist</h1>';
     foreach ($steamprofile['friendlist'] as $key=>$friend) {
-        $content .= 'Name: <span style="color: #811e1e;">' . $friendListArray[$key]['personaname'] . '<img style="width: 30px; border-radius: 5px; vertical-align: middle; margin-left: 10px;" src="' . $friendListArray[$key]['avatarfull'] . '"></span><br />';
+        //Den är broken just nu, fixar soonTM
+        $varDate = '';
+        $varDate = $friend['friend_since'];
+        $dt = new DateTime("@$varDate");
+        $content .= '<div class="friendCell">';
+        $content .= '<span><img style="width: 40px; border-radius: 5px; vertical-align: middle;" src="' . $friendListArray[$key]['avatarfull'] . '"></span><span class="friendName">' . $friendListArray[$key]['personaname'] . '</span><br />';
+        $content .= '<h3>Friend since: '.$dt->format('Y-m-d').'</h3>';
+        $content .= '</div>';
     }
     $content .= '</div>';
     echo $content;
