@@ -25,20 +25,20 @@ if(!isset($_SESSION['steamid'])) {
     include ('steamauth/userInfo.php');
     //Protected content
 
-    $friendlistLength = count($steamprofile['friendlist']);
-    $id = 1;
-    foreach($steamprofile['friendlist'] as $friend)
-    {
-        if($id >= $friendlistLength)
+        $friendlistLength = count($steamprofile['friendlist']);
+        $id = 1;
+        foreach($steamprofile['friendlist'] as $friend)
         {
-            $steamfriendIDs .= $friend['steamid'];
+            if($id >= $friendlistLength)
+            {
+                $steamfriendIDs .= $friend['steamid'];
 
-        } else{
-            $steamfriendIDs .= $friend['steamid'] . ',%20';
+            } else {
+                $steamfriendIDs .= $friend['steamid'] . ',%20';
+            }
+
+            $id++;
         }
-
-        $id++;
-    }
 
     $friendListArray = getSteamNames($steamfriendIDs);
 
@@ -48,17 +48,26 @@ if(!isset($_SESSION['steamid'])) {
     $content .="<h2>Welcome " . $steamprofile['personaname'] . "</h2>";
     $content .= "<form action=\"steamauth/logout.php\" method=\"post\"><input value=\"Logout\" type=\"submit\" /></form>";
     $content .= '</div>';
+    if(isset($_GET['chat']))
+    {
+    $content .="<div style='background-color: white; margin: 10px; display: inline-block;'<h2>You're now chatting with " . $_GET['chat'] . "</h2></div>";
+    }
     $content .= '<div id="friendlist">';
     $content .= '<h1 id="friendHeader">Friendslist</h1>';
-    foreach ($steamprofile['friendlist'] as $key=>$friend) {
-        //Den är broken just nu, fixar soonTM
+
+    foreach($steamprofile['friendlist'] as $key=>$friend)
+    {
+        /* Måste kika vidare på detta, vi får tillbaka en randomized array av vår friendListArray anrop via steam(den är alltid randomized). Måste synka arrayenerna så vi visar rätt date för rätt steamid.
         $varDate = '';
         $varDate = $friend['friend_since'];
         $dt = new DateTime("@$varDate");
+        */
         $content .= '<div class="friendCell">';
         $content .= '<span><img style="width: 40px; border-radius: 5px; vertical-align: middle;" src="' . $friendListArray[$key]['avatarfull'] . '"></span><span class="friendName">' . $friendListArray[$key]['personaname'] . '</span><br />';
-        $content .= '<h3>Friend since: '.$dt->format('Y-m-d').'</h3>';
+        /*$content .= '<h3>Friend since: '.$dt->format('Y-m-d').'</h3>';*/
+        $content .= '<a href="?chat=' . $friendListArray[$key]['steamid'] . '">Chat</a>';
         $content .= '</div>';
+
     }
     $content .= '</div>';
     echo $content;

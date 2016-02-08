@@ -1,13 +1,25 @@
 <?php
 	include("settings.php");
+function file_get_contents_curl($url) {
+    $ch = curl_init();
+
+    curl_setopt($ch, CURLOPT_AUTOREFERER, TRUE);
+    curl_setopt($ch, CURLOPT_HEADER, 0);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+    curl_setopt($ch, CURLOPT_URL, $url);
+    curl_setopt($ch, CURLOPT_FOLLOWLOCATION, TRUE);
+
+    $data = curl_exec($ch);
+    curl_close($ch);
+
+    return $data;
+}
     if (empty($_SESSION['steam_uptodate']) or $_SESSION['steam_uptodate'] == false or empty($_SESSION['steam_personaname'])) {
-        $UserInfoUrl = file_get_contents("http://api.steampowered.com/ISteamUser/GetPlayerSummaries/v0002/?key=".$steamauth['apikey']."&steamids=".$_SESSION['steamid']);
-        $UserFriendsUrl = file_get_contents("http://api.steampowered.com/ISteamUser/GetFriendList/v0001/?key=".$steamauth['apikey']."&steamid=".$_SESSION['steamid']."&relationship=friend");
+        $UserInfoUrl = file_get_contents_curl("http://api.steampowered.com/ISteamUser/GetPlayerSummaries/v0002/?key=".$steamauth['apikey']."&steamids=".$_SESSION['steamid']);
+        $UserFriendsUrl = file_get_contents_curl("http://api.steampowered.com/ISteamUser/GetFriendList/v0001/?key=".$steamauth['apikey']."&steamid=".$_SESSION['steamid']."&relationship=friend");
         $content = json_decode($UserInfoUrl, true);
         $userFriendList = json_decode($UserFriendsUrl, true);
 
-        /*$dt = new DateTime("@$snorre");
-        echo $dt->format('Y-m-d');*/
         $_SESSION['steam_friendslist'] = $userFriendList['friendslist']['friends'];
         $_SESSION['steam_steamid'] = $content['response']['players'][0]['steamid'];
         $_SESSION['steam_communityvisibilitystate'] = $content['response']['players'][0]['communityvisibilitystate'];
@@ -45,7 +57,7 @@
     $steamprofile['timecreated'] = $_SESSION['steam_timecreated'];
 
     function getSteamNames($steamID) {
-        $steamUserNamesUrl = file_get_contents("http://api.steampowered.com/ISteamUser/GetPlayerSummaries/v0002/?key=41AF33A7F00028D1E153D748597DEEF3&steamids=".$steamID);
+        $steamUserNamesUrl = file_get_contents_curl("http://api.steampowered.com/ISteamUser/GetPlayerSummaries/v0002/?key=41AF33A7F00028D1E153D748597DEEF3&steamids=".$steamID);
         $content = json_decode($steamUserNamesUrl, true);
         return $content['response']['players'];
     }
