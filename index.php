@@ -9,19 +9,32 @@
     <title>Steam Portal</title>
 <link rel="stylesheet" href="css/style.css">
 <link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet' type='text/css'>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
 </head>
 <body>
+<header>
 <?php
 if(!isset($_SESSION['steamid'])) {
     $content = '';
-    $content .= '<div id="wrapper">';
-    $content .= '<h1>Welcome!</h1>';
-    $content .= '<h1>Please sign in to retrieve your profile</h1>';
-    $content .= '</div>';
-    $content .= "<form action=\"?login\" method=\"post\"> <input id=\"sign-in-btn\" type=\"image\" src=\"http://steamcommunity-a.akamaihd.net/public/images/signinthroughsteam/sits_large_noborder.png\"></form>";
+    $content .= "<form action=\"?login\" method=\"post\"> <input id=\"sign-in-btn\" type=\"image\" src=\"http://steamcommunity-a.akamaihd.net/public/images/signinthroughsteam/sits_large_noborder.png\"><h2>SteamPortal</h2></form>";
     echo $content;
     steamlogin(); //login button
-}  else {
+?>
+    <section id="intro-container">
+        <h1 class="intro-headerText">The ultimate way to interact with your friends on steam</h1>
+        <a href="#friends-container"><button>HOW IT WORKS</button></a>
+    </section>
+
+    <section id="friends-container">
+        <div class="friends-text">
+            <h2>Easy to communicate with your friends in a private chat and group chats</h2>
+        </div>
+        <figure class="friends-img">
+            <img src="img/friendsList.png">
+        </figure>
+    </section>
+</header>
+<?php }  else {
     include ('steamauth/userInfo.php');
     //Protected content
 
@@ -85,5 +98,6 @@ if(!isset($_SESSION['steamid'])) {
 }
 ?>
 <script src="js/jquery.js"></script>
+<script src="js/script.js"></script>
 </body>
 </html>
