@@ -48,13 +48,21 @@ if(!isset($_SESSION['steamid'])) {
     $content .="<h2>Welcome " . $steamprofile['personaname'] . "</h2>";
     $content .= "<form action=\"steamauth/logout.php\" method=\"post\"><input value=\"Logout\" type=\"submit\" /></form>";
     $content .= '</div>';
-    if(isset($_GET['chat']))
-    {
-    $content .="<div style='background-color: white; margin: 10px; display: inline-block;'<h2>You're now chatting with " . $_GET['chat'] . "</h2></div>";
-    }
+
     $content .= '<div id="friendlist">';
     $content .= '<h1 id="friendHeader">Friendslist</h1>';
-
+    $content .= '<h2 id="penis"></h2>';
+    ?>
+    <script type="text/javascript">
+    window.onload = function() {
+    $('.chatLink').on('click', function() {
+            $.get('chat.php?chat=' + $(this).attr("value"), function(data, status){
+                penis.innerHTML = data;
+            });
+        });
+    }
+    </script>
+    <?php
     foreach($steamprofile['friendlist'] as $key=>$friend)
     {
         /* Måste kika vidare på detta, vi får tillbaka en randomized array av vår friendListArray anrop via steam(den är alltid randomized). Måste synka arrayenerna så vi visar rätt date för rätt steamid.
@@ -65,7 +73,7 @@ if(!isset($_SESSION['steamid'])) {
         $content .= '<div class="friendCell">';
         $content .= '<span><img style="width: 40px; border-radius: 5px; vertical-align: middle;" src="' . $friendListArray[$key]['avatarfull'] . '"></span><span class="friendName">' . $friendListArray[$key]['personaname'] . '</span><br />';
         /*$content .= '<h3>Friend since: '.$dt->format('Y-m-d').'</h3>';*/
-        $content .= '<a href="?chat=' . $friendListArray[$key]['steamid'] . '">Chat</a>';
+        $content .= '<a href="#" class="chatLink" value="'.$friendListArray[$key]['steamid'].'">Chat</a>';
         $content .= '</div>';
 
     }
@@ -76,5 +84,6 @@ if(!isset($_SESSION['steamid'])) {
 
 }
 ?>
+<script src="js/jquery.js"></script>
 </body>
 </html>
