@@ -70,7 +70,7 @@ if(!isset($_SESSION['steamid'])) {
     window.onload = function() {
     $('.chatLink').on('click', function() {
             $.get('chat.php?chat=' + $(this).attr("value"), function(data, status){
-                penis.innerHTML = data;
+                $('#penis').html = data;
             });
         });
     }
