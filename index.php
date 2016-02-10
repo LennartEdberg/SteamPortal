@@ -14,13 +14,26 @@
 <?php
 if(!isset($_SESSION['steamid'])) {
     $content = '';
-    $content .= '<div id="wrapper">';
-    $content .= '<h1>Welcome!</h1>';
-    $content .= '<h1>Please sign in to retrieve your profile</h1>';
-    $content .= '</div>';
+    $content = '<header>';
     $content .= "<form action=\"?login\" method=\"post\"> <input id=\"sign-in-btn\" type=\"image\" src=\"http://steamcommunity-a.akamaihd.net/public/images/signinthroughsteam/sits_large_noborder.png\"></form>";
-    echo $content;
     steamlogin(); //login button
+
+    $content .= '<section id="intro-container">';
+    $content .= '<h1 class="intro-headerText">The ultimate way to interact with your friends on steam</h1>';
+    $content .= '<a href="#friends-container"><button>HOW IT WORKS</button></a>';
+    $content .= '</section>';
+
+    $content .= '<section id="friends-container">';
+    $content .= '<div class="friends-text">';
+    $content .= '<h2>Easy to communicate with your friends in a private chat and group chats</h2>';
+    $content .= '</div>';
+    $content .= '<figure class="friends-img">';
+    $content .= '<img src="img/friendsList.png">';
+    $content .= '</figure>';
+    $content .= '</section>';
+    $content .= '</header>';
+    echo $content;
+
 }  else {
     include ('steamauth/userInfo.php');
     //Protected content
@@ -84,6 +97,7 @@ if(!isset($_SESSION['steamid'])) {
 
 }
 ?>
-<script src="js/jquery.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+<script src="js/script.js"></script>
 </body>
 </html>

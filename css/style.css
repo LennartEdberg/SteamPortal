@@ -4,24 +4,50 @@
     padding: 0px;
 }
 
+@import url(https://fonts.googleapis.com/css?family=Open+Sans:400,300,700,600,800);
+
 body
 {
-    background-color: #2a2939;
+/*    background-color: #2a2939;*/
+    background-color: #252525;
     font-family: 'Montserrat', sans-serif;
 }
 
-#wrapper
-{
-    text-align: center;
-    margin: 0 auto;
-    font-size: 24px;
-    margin-top: calc(50vh - 167px); /* Totalla summan av texternashöjd + knappenshöjd */
+/* LOGIN PAGE CSS */
+
+header {
+    width: 100%;
+    height: 70px;
+    background: #1e1e1e;
 }
 
-#sign-in-btn
+header form {
+    width: 100%;
+    height: 70px;
+}
+
+header form h2 {
+    line-height: 70px;
+    margin-left: 5%;
+    color: #188dce;
+    font-weight: 400;
+    -webkit-transition: all 0.4s ease-in-out;
+    -moz-transition: all 0.4s ease-in-out;
+    -o-transition: all 0.4s ease-in-out;
+    transition: all 0.4s ease-in-out;
+    cursor: pointer;
+}
+
+header form h2:hover {
+    color: #00a4ff;
+}
+
+header form #sign-in-btn
 {
     display: block;
-    margin: 0 auto;
+    float: right;
+    padding-top: 14px;
+    margin-right: 5%;
 }
 
 #profile_picture
@@ -32,9 +58,79 @@ body
 
 #sidebar
 {
-    width: 300px;
+    width: 200px;
     background-color: #fff;
 }
+
+#intro-container {
+    width: 60%;
+    height: 400px;
+    margin: 0 auto;
+    text-align: center;
+    padding-top: 140px;
+    font-family: 'Open Sans', sans-serif;
+}
+
+#intro-container .intro-headerText {
+    font-size: 80px;
+    font-weight: 500;
+    color: #fafafa;
+}
+
+#intro-container button {
+    width: 600px;
+    height: 70px;
+    margin-top: 60px;
+    background: #188dce;
+    border: none;
+    border-radius: 35px;
+    color: #fafafa;
+    font-weight: 600;
+    letter-spacing: 2px;
+    -webkit-transition: all 0.4s ease-in-out;
+    -moz-transition: all 0.4s ease-in-out;
+    -o-transition: all 0.4s ease-in-out;
+    transition: all 0.4s ease-in-out;
+}
+
+#intro-container button:focus {
+    outline: none;
+}
+
+#intro-container button:hover {
+    background: #206389;
+}
+
+#friends-container {
+    width: 100%;
+    height: 800px;
+    background: #2c2c2c;
+    margin-top: 110px;
+    text-align: center;
+    font-family: 'Open Sans', sans-serif;
+}
+
+.friends-text {
+    width: 45%;
+    display: inline-block;
+    font-size: 40px;
+    vertical-align:top;
+    position: relative;
+    color: #fafafa;
+    font-weight: 400;
+    top: 40%;
+    transform: translateY(-40%);
+}
+
+.friends-img {
+    width: 40%;
+    display: inline-block;
+    vertical-align:top;
+    margin-top: 60px;
+}
+
+
+/* END LOGIN PAGE CSS */
 
 #friendlist
 {
@@ -62,10 +158,4 @@ body
     font-size: 24px;
     margin-left: 20px;
 
-}
-
-h3
-{
-    color: white;
-    font-size: 16px;
 }
