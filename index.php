@@ -9,10 +9,16 @@
     <title>Steam Portal</title>
 <link rel="stylesheet" href="css/style.css">
 <link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet' type='text/css'>
+<script src='https://cdn.firebase.com/js/client/2.2.1/firebase.js'></script>
 </head>
 <body>
 <?php
 if(!isset($_SESSION['steamid'])) {
+    ?>
+    <script type="text/javascript">
+    var myDataRef = new Firebase('https://steamportal.firebaseio.com/users');
+    </script>
+    <?php
     $content = '';
     $content = '<header>';
     $content .= "<form action=\"?login\" method=\"post\"> <input id=\"sign-in-btn\" type=\"image\" src=\"http://steamcommunity-a.akamaihd.net/public/images/signinthroughsteam/sits_large_noborder.png\"></form>";
