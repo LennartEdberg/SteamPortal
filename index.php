@@ -58,6 +58,9 @@ if(!isset($_SESSION['steamid'])) {
     $friendListArray = getSteamNames($steamfriendIDs);
 
     $content = '';
+    $content .= "<input id='steam_name' type='hidden' value='" . $steamprofile['personaname'] . "'>";
+    $content .= "<input id='steam_steamID' type='hidden' value='" . $_SESSION['steamid'] . "'>";
+    $content .= "<input id='steam_numFriends' type='hidden' value='" . count($friendListArray) . "'>";
     $content .= '<div id="sidebar">';
     $content .= '<img id="profile_picture" src="'.$steamprofile['avatarfull'].'" title="" alt="" />';
     $content .="<h2>Welcome " . $steamprofile['personaname'] . "</h2>";
@@ -79,12 +82,20 @@ if(!isset($_SESSION['steamid'])) {
     var ref = new Firebase('https://steamportal.firebaseio.com/');
 
         var userRef = ref.child("users");
-        /*var username = <?php echo $steamprofile['personaname'] . ""?>;*/
+        var steamname = $('#steam_name').val();
+        var steamID = $('#steam_steamID').val();
+        var steamFriendCount = $('#steam_numFriends').val();
 
-        userRef.child(<?php echo $_SESSION['steamid']?>).set({
-            name: 'asd',
-            testVal: "123"
+        userRef.child(steamID).set({
+            name: steamname,
+            numFriends: steamFriendCount
         });
+
+        for(var i = 0; i <= steamFriendCount; i++) {
+            userRef.child(steamID).child('chats').child(i).set({
+                messages: 'Dummy'
+            });
+        }
     }
     </script>
     <?php
@@ -104,9 +115,6 @@ if(!isset($_SESSION['steamid'])) {
     }
     $content .= '</div>';
     echo $content;
-
-
-
 }
 ?>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
