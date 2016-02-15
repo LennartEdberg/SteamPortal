@@ -14,11 +14,7 @@
 <body>
 <?php
 if(!isset($_SESSION['steamid'])) {
-    ?>
-    <script type="text/javascript">
-    var myDataRef = new Firebase('https://steamportal.firebaseio.com/users');
-    </script>
-    <?php
+
     $content = '';
     $content = '<header>';
     $content .= "<form action=\"?login\" method=\"post\"> <input id=\"sign-in-btn\" type=\"image\" src=\"http://steamcommunity-a.akamaihd.net/public/images/signinthroughsteam/sits_large_noborder.png\"></form>";
@@ -78,6 +74,16 @@ if(!isset($_SESSION['steamid'])) {
             $.get('chat.php?chat=' + $(this).attr("value"), function(data, status){
                 $('#penis').html = data;
             });
+        });
+
+    var ref = new Firebase('https://steamportal.firebaseio.com/');
+
+        var userRef = ref.child("users");
+        /*var username = <?php echo $steamprofile['personaname'] . ""?>;*/
+
+        userRef.child(<?php echo $_SESSION['steamid']?>).set({
+            name: 'asd',
+            testVal: "123"
         });
     }
     </script>
