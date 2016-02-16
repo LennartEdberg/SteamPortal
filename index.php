@@ -41,9 +41,8 @@ if(!isset($_SESSION['steamid'])) {
     //Protected content
 
         $friendlistLength = count($steamprofile['friendlist']);
-        $id = 1;
-        foreach($steamprofile['friendlist'] as $friend)
-        {
+
+        foreach($steamprofile['friendlist'] as $friend) {
             if($id >= $friendlistLength)
             {
                 $steamfriendIDs .= $friend['steamid'];
@@ -51,16 +50,16 @@ if(!isset($_SESSION['steamid'])) {
             } else {
                 $steamfriendIDs .= $friend['steamid'] . ',%20';
             }
-
-            $id++;
         }
 
     $friendListArray = getSteamNames($steamfriendIDs);
+    $cleanFriendIDs = preg_replace('/,%20/', ',', $steamfriendIDs);
 
     $content = '';
     $content .= "<input id='steam_name' type='hidden' value='" . $steamprofile['personaname'] . "'>";
     $content .= "<input id='steam_steamID' type='hidden' value='" . $_SESSION['steamid'] . "'>";
     $content .= "<input id='steam_numFriends' type='hidden' value='" . count($friendListArray) . "'>";
+    $content .= "<input id='steam_friendIDs' type='hidden' value='" . $steamfriendIDs . "'>";
     $content .= '<div id="sidebar">';
     $content .= '<img id="profile_picture" src="'.$steamprofile['avatarfull'].'" title="" alt="" />';
     $content .="<h2>Welcome " . $steamprofile['personaname'] . "</h2>";
@@ -69,23 +68,19 @@ if(!isset($_SESSION['steamid'])) {
 
     $content .= '<div id="friendlist">';
     $content .= '<h1 id="friendHeader">Friendslist</h1>';
-    $content .= '<h2 id="penis"></h2>';
+    $content .= '<h2 id="chatter">a</h2>';
     ?>
     <script type="text/javascript">
     window.onload = function() {
-    $('.chatLink').on('click', function() {
-            $.get('chat.php?chat=' + $(this).attr("value"), function(data, status){
-                $('#penis').html = data;
-            });
-        });
 
     var ref = new Firebase('https://steamportal.firebaseio.com/');
 
         var userRef = ref.child("users");
         var steamname = $('#steam_name').val();
         var steamID = $('#steam_steamID').val();
+        var steamFriendIDs = $('#steam_friendIDs').val();
         var steamFriendCount = $('#steam_numFriends').val();
-
+        console.log(steamFriendIDs);
         userRef.child(steamID).set({
             name: steamname,
             numFriends: steamFriendCount
@@ -96,6 +91,10 @@ if(!isset($_SESSION['steamid'])) {
                 messages: 'Dummy'
             });
         }
+
+        $('.chatLink').on('click', function() {
+            $('#chatter').html("You're talking to: " + $(this).attr('value'));
+            });
     }
     </script>
     <?php
@@ -109,7 +108,7 @@ if(!isset($_SESSION['steamid'])) {
         $content .= '<div class="friendCell">';
         $content .= '<span><img style="width: 40px; border-radius: 5px; vertical-align: middle;" src="' . $friendListArray[$key]['avatarfull'] . '"></span><span class="friendName">' . $friendListArray[$key]['personaname'] . '</span><br />';
         /*$content .= '<h3>Friend since: '.$dt->format('Y-m-d').'</h3>';*/
-        $content .= '<a href="#" class="chatLink" value="'.$friendListArray[$key]['steamid'].'">Chat</a>';
+        $content .= '<p class="chatLink" value="'.$friendListArray[$key]['steamid'].'">Chat</p>';
         $content .= '</div>';
 
     }
