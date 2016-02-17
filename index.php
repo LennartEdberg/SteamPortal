@@ -53,13 +53,14 @@ if(!isset($_SESSION['steamid'])) {
         }
 
     $friendListArray = getSteamNames($steamfriendIDs);
-    $cleanFriendIDs = preg_replace('/,%20/', ',', $steamfriendIDs);
-
+    foreach($steamprofile['friendlist'] as $key=>$friend) {
+        $cleanFriendArray[] = $friend['steamid'];
+    }
+    echo count($cleanFriendArray);
     $content = '';
     $content .= "<input id='steam_name' type='hidden' value='" . $steamprofile['personaname'] . "'>";
     $content .= "<input id='steam_steamID' type='hidden' value='" . $_SESSION['steamid'] . "'>";
     $content .= "<input id='steam_numFriends' type='hidden' value='" . count($friendListArray) . "'>";
-    $content .= "<input id='steam_friendIDs' type='hidden' value='" . $steamfriendIDs . "'>";
     $content .= '<div id="sidebar">';
     $content .= '<img id="profile_picture" src="'.$steamprofile['avatarfull'].'" title="" alt="" />';
     $content .="<h2>Welcome " . $steamprofile['personaname'] . "</h2>";
@@ -78,17 +79,16 @@ if(!isset($_SESSION['steamid'])) {
         var userRef = ref.child("users");
         var steamname = $('#steam_name').val();
         var steamID = $('#steam_steamID').val();
-        var steamFriendIDs = $('#steam_friendIDs').val();
+        var steamFriendIDs = <?php echo json_encode($cleanFriendArray) ?>;
         var steamFriendCount = $('#steam_numFriends').val();
-        console.log(steamFriendIDs);
         userRef.child(steamID).set({
             name: steamname,
             numFriends: steamFriendCount
         });
 
         for(var i = 0; i <= steamFriendCount; i++) {
-            userRef.child(steamID).child('chats').child(i).set({
-                messages: 'Dummy'
+            userRef.child(steamID).child('chats').child(steamFriendIDs[i]).set({
+                messages: 'a'
             });
         }
 
