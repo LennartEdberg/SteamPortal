@@ -81,11 +81,13 @@ if(!isset($_SESSION['steamid'])) {
         var steamID = $('#steam_steamID').val();
         var steamFriendIDs = <?php echo json_encode($cleanFriendArray) ?>;
         var steamFriendCount = $('#steam_numFriends').val();
+        //Kommer behöva ändra denna till att bara göra .set 1 gång då .set skriver över alla existerande värden och inte kollar efter ändringar och               sedan skriver över dem. Så t.ex. att använda update på userRef och föra in steamID där och möjligtvis uppdatera på så vis. Då kollar man                 nuvarande längd på DB.chats och sedan om n är lägre än $cleanFriendArray och då gör man en update.
         userRef.child(steamID).set({
             name: steamname,
             numFriends: steamFriendCount
         });
 
+        //Kommer byta ut detta mot något mer dynamiskt typ som att en chatt sparas ner i DB när man klickar chat istället för att spara ner alla första           gången man går in på sidan. .set skriver över alla värden så därför är det bättre att skapa dynamiskt eftersom.
         for(var i = 0; i <= steamFriendCount; i++) {
             userRef.child(steamID).child('chats').child(steamFriendIDs[i]).set({
                 messages: 'a'
