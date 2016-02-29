@@ -56,7 +56,7 @@ if(!isset($_SESSION['steamid'])) {
     foreach($steamprofile['friendlist'] as $key=>$friend) {
         $cleanFriendArray[] = $friend['steamid'];
     }
-    echo count($cleanFriendArray);
+
     $content = '';
     $content .= "<input id='steam_name' type='hidden' value='" . $steamprofile['personaname'] . "'>";
     $content .= "<input id='steam_steamID' type='hidden' value='" . $_SESSION['steamid'] . "'>";
@@ -70,6 +70,13 @@ if(!isset($_SESSION['steamid'])) {
     $content .= '<div id="friendlist">';
     $content .= '<h1 id="friendHeader">Friendslist</h1>';
     $content .= '<h2 id="chatter">a</h2>';
+    $content .= '<div id="chat">';
+    $content .= '<div id="chatlog">';
+    $content .= '</div>';
+    $content .= '<input id="chatTxtInput" type="text" name="chatTxtInput" placeholder="Chat">';
+    $content .= '<p id="chatBtn" href="#">Send message</p>';
+    $content .= '<input type="hidden" id="chatterID" name="chatterID">';
+    $content .= '</div>';
     ?>
     <script type="text/javascript">
     window.onload = function() {
@@ -81,22 +88,56 @@ if(!isset($_SESSION['steamid'])) {
         var steamID = $('#steam_steamID').val();
         var steamFriendIDs = <?php echo json_encode($cleanFriendArray) ?>;
         var steamFriendCount = $('#steam_numFriends').val();
+        var UserChatID;
         //Kommer behöva ändra denna till att bara göra .set 1 gång då .set skriver över alla existerande värden och inte kollar efter ändringar och               sedan skriver över dem. Så t.ex. att använda update på userRef och föra in steamID där och möjligtvis uppdatera på så vis. Då kollar man                 nuvarande längd på DB.chats och sedan om n är lägre än $cleanFriendArray och då gör man en update.
-        userRef.child(steamID).set({
+        userRef.child(steamID).update({
             name: steamname,
             numFriends: steamFriendCount
         });
 
         //Kommer byta ut detta mot något mer dynamiskt typ som att en chatt sparas ner i DB när man klickar chat istället för att spara ner alla första           gången man går in på sidan. .set skriver över alla värden så därför är det bättre att skapa dynamiskt eftersom.
-        for(var i = 0; i <= steamFriendCount; i++) {
-            userRef.child(steamID).child('chats').child(steamFriendIDs[i]).set({
-                messages: 'a'
-            });
+        function startChat() {
+            $('#chatterID').val($(this).attr('value'));
+            UserChatID = $('#chatterID').attr('value');
+            userRef.child('chats').once('value', function(snapshot) {
+                if(snapshot.hasChildren()) {
+                    snapshot.forEach(function(childSnapshot) {
+                        var data = childSnapshot.val();
+                        if(data.steamid1 != UserChatID && data.steamid2 != steamID && data.steamid1 != steamID && data.steamid2 != User) {
+                            userRef.child('chats').push({
+                            steamid1: UserChatID,
+                            steamid2: steamID,
+                            message: 'Test'
+                            });
+                        } else {
+                            console.log("This user already exists!");
+                        }
+                    })
+                } else {
+                    userRef.child('chats').push({
+                        steamid1: UserChatID,
+                        steamid2: steamID,
+                        message: 'Test'
+                    });
+                    console.log("Går in här");
+                }
+
+            })
         }
 
-        $('.chatLink').on('click', function() {
-            $('#chatter').html("You're talking to: " + $(this).attr('value'));
+        function sendChatMsg() {
+
+            var input = $("#chatTxtInput");
+            var txtMessage = input.val();
+            console.log(txtMessage);
+            userRef.child(steamID).child('chats').child(UserChatID).push({
+                message: txtMessage
             });
+            console.log("Blyat");
+        }
+
+        $('.chatLink').on('click', startChat);
+        $('#chatBtn').on('click', sendChatMsg);
     }
     </script>
     <?php
