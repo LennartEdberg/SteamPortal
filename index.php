@@ -98,30 +98,23 @@ if(!isset($_SESSION['steamid'])) {
         //Kommer byta ut detta mot något mer dynamiskt typ som att en chatt sparas ner i DB när man klickar chat istället för att spara ner alla första           gången man går in på sidan. .set skriver över alla värden så därför är det bättre att skapa dynamiskt eftersom.
         function startChat() {
             $('#chatterID').val($(this).attr('value'));
-            UserChatID = $('#chatterID').attr('value');
-            userRef.child('chats').once('value', function(snapshot) {
-                if(snapshot.hasChildren()) {
-                    snapshot.forEach(function(childSnapshot) {
-                        var data = childSnapshot.val();
-                        if(data.steamid1 != UserChatID && data.steamid2 != steamID && data.steamid1 != steamID && data.steamid2 != User) {
-                            userRef.child('chats').push({
-                            steamid1: UserChatID,
-                            steamid2: steamID,
-                            message: 'Test'
-                            });
-                        } else {
-                            console.log("This user already exists!");
-                        }
-                    })
-                } else {
-                    userRef.child('chats').push({
-                        steamid1: UserChatID,
-                        steamid2: steamID,
-                        message: 'Test'
-                    });
-                    console.log("Går in här");
-                }
+            UserChatID = $(this).attr('value');
 
+            userRef.child(steamID).child('chats').once('value', function(snapshot) {
+                userRef.child(UserChatID).child('chats').once('value', function(snapshot2) {
+                    if(snapshot.hasChild(UserChatID)) {
+                        $('#chatterID').val(steamID);
+                    }
+                    else if(snapshot2.hasChild(steamID)) {
+                        $('#chatterID').val(UserChatID);
+                    }
+                    else {
+                        userRef.child(steamID).child('chats').child(UserChatID).update({
+                            init: 1
+                        });
+                        $('#chatterID').val(steamID);
+                    }
+                })
             })
         }
 
@@ -129,11 +122,16 @@ if(!isset($_SESSION['steamid'])) {
 
             var input = $("#chatTxtInput");
             var txtMessage = input.val();
-            console.log(txtMessage);
-            userRef.child(steamID).child('chats').child(UserChatID).push({
-                message: txtMessage
-            });
-            console.log("Blyat");
+            if($('#chatterID').val() == steamID) {
+                userRef.child(steamID).child('chats').child(UserChatID).push({
+                    message: txtMessage
+                });
+            }
+            else {
+                userRef.child(UserChatID).child('chats').child(steamID).push({
+                    message: txtMessage
+                });
+            }
         }
 
         $('.chatLink').on('click', startChat);
