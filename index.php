@@ -83,6 +83,7 @@ if(!isset($_SESSION['steamid'])) {
 
     var ref = new Firebase('https://steamportal.firebaseio.com/');
 
+        var runUpdate = 0;
         var userRef = ref.child("users");
         var steamname = $('#steam_name').val();
         var steamPicturUrl = $('#steam_pictureurl').val();
@@ -95,7 +96,6 @@ if(!isset($_SESSION['steamid'])) {
             name: steamname,
             pictureURL: steamPicturUrl
         });
-
 
         function startChat() {
             $('#chatlog').empty();
@@ -120,13 +120,17 @@ if(!isset($_SESSION['steamid'])) {
                         $('#chatterID').val(UserChatID);
                     }
                     else {
-                        userRef.child(steamID).child('chats').child(UserChatID).update({
-                            init: 1
-                        });
                         $('#chatterID').val(steamID);
                     }
                 })
             })
+            if(runUpdate == 0) {
+                    userRef.child(steamID).child('chats').child(UserChatID).limitToLast(1).on('child_added', function(DataSnapshot) {
+                        DataSnapshot = DataSnapshot.val();
+                        $('#chatlog').append("<p>" + DataSnapshot.name + ": " + DataSnapshot.message + "</p>");
+                    })
+                    runUpdate = 1;
+                }
         }
 
         function sendChatMsg() {
@@ -135,31 +139,25 @@ if(!isset($_SESSION['steamid'])) {
             var txtMessage = input.val();
 
             if($('#chatterID').val() == steamID) {
-                userRef.child(steamID).once("value", function(snapshot){
-                    var data = snapshot.val();
 
-                    userRef.child(steamID).child('chats').child(UserChatID).push({
-                        message: txtMessage,
-                        name: data.name,
-                        pictureUrl: data.pictureURL
-                    });
+                userRef.child(steamID).child('chats').child(UserChatID).push({
+                    message: txtMessage,
+                    name: "data.name",
+                    pictureUrl: "data.pictureURL"
+                });
+            } else {
+                userRef.child(UserChatID).child('chats').child(steamID).push({
+                    message: txtMessage,
+                    name: data.name,
+                    pictureUrl: data.pictureURL
                 });
             }
-            else {
-                 userRef.child(steamID).once("value", function(snapshot){
-                    var data = snapshot.val();
 
-                    userRef.child(UserChatID).child('chats').child(steamID).push({
-                        message: txtMessage,
-                        name: data.name,
-                        pictureUrl: data.pictureURL
-                    });
-                });
-            }
         }
 
         $('.chatLink').on('click', startChat);
         $('#chatBtn').on('click', sendChatMsg);
+
     }
     </script>
     <?php
