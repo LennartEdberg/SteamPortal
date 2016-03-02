@@ -60,7 +60,7 @@ if(!isset($_SESSION['steamid'])) {
     $content = '';
     $content .= "<input id='steam_name' type='hidden' value='" . $steamprofile['personaname'] . "'>";
     $content .= "<input id='steam_steamID' type='hidden' value='" . $_SESSION['steamid'] . "'>";
-    $content .= "<input id='steam_numFriends' type='hidden' value='" . count($friendListArray) . "'>";
+    $content .= "<input id='steam_pictureurl' type='hidden' value='" . $steamprofile['avatarfull'] . "'>";
     $content .= '<div id="sidebar">';
     $content .= '<img id="profile_picture" src="'.$steamprofile['avatarfull'].'" title="" alt="" />';
     $content .="<h2>Welcome " . $steamprofile['personaname'] . "</h2>";
@@ -71,7 +71,7 @@ if(!isset($_SESSION['steamid'])) {
     $content .= '<h1 id="friendHeader">Friendslist</h1>';
     $content .= '<h2 id="chatter">a</h2>';
     $content .= '<div id="chat">';
-    $content .= '<div id="chatlog">';
+    $content .= '<div id="chatlog" style="background-color: white; min-height: 200px; min-width: 200px; margin-bottom: 20px; margin-right: 50px;">';
     $content .= '</div>';
     $content .= '<input id="chatTxtInput" type="text" name="chatTxtInput" placeholder="Chat">';
     $content .= '<p id="chatBtn" href="#">Send message</p>';
@@ -85,18 +85,20 @@ if(!isset($_SESSION['steamid'])) {
 
         var userRef = ref.child("users");
         var steamname = $('#steam_name').val();
+        var steamPicturUrl = $('#steam_pictureurl').val();
         var steamID = $('#steam_steamID').val();
         var steamFriendIDs = <?php echo json_encode($cleanFriendArray) ?>;
-        var steamFriendCount = $('#steam_numFriends').val();
         var UserChatID;
-        //Kommer behöva ändra denna till att bara göra .set 1 gång då .set skriver över alla existerande värden och inte kollar efter ändringar och               sedan skriver över dem. Så t.ex. att använda update på userRef och föra in steamID där och möjligtvis uppdatera på så vis. Då kollar man                 nuvarande längd på DB.chats och sedan om n är lägre än $cleanFriendArray och då gör man en update.
+
+        //User logs in
         userRef.child(steamID).update({
             name: steamname,
-            numFriends: steamFriendCount
+            pictureURL: steamPicturUrl
         });
 
-        //Kommer byta ut detta mot något mer dynamiskt typ som att en chatt sparas ner i DB när man klickar chat istället för att spara ner alla första           gången man går in på sidan. .set skriver över alla värden så därför är det bättre att skapa dynamiskt eftersom.
+
         function startChat() {
+            $('#chatlog').empty();
             $('#chatterID').val($(this).attr('value'));
             UserChatID = $(this).attr('value');
 
@@ -104,6 +106,15 @@ if(!isset($_SESSION['steamid'])) {
                 userRef.child(UserChatID).child('chats').once('value', function(snapshot2) {
                     if(snapshot.hasChild(UserChatID)) {
                         $('#chatterID').val(steamID);
+
+                        userRef.child(steamID).child('chats').child(UserChatID).once('value', function(ChatSnapshot) {
+                            ChatSnapshot.forEach(function(childSnapshot) {
+                                childData = childSnapshot.val();
+                                if(childData != 1) {
+                                    $('#chatlog').append("<p>" + childData.name + ": " + childData.message + "</p>");
+                                }
+                            })
+                        })
                     }
                     else if(snapshot2.hasChild(steamID)) {
                         $('#chatterID').val(UserChatID);
@@ -122,14 +133,27 @@ if(!isset($_SESSION['steamid'])) {
 
             var input = $("#chatTxtInput");
             var txtMessage = input.val();
+
             if($('#chatterID').val() == steamID) {
-                userRef.child(steamID).child('chats').child(UserChatID).push({
-                    message: txtMessage
+                userRef.child(steamID).once("value", function(snapshot){
+                    var data = snapshot.val();
+
+                    userRef.child(steamID).child('chats').child(UserChatID).push({
+                        message: txtMessage,
+                        name: data.name,
+                        pictureUrl: data.pictureURL
+                    });
                 });
             }
             else {
-                userRef.child(UserChatID).child('chats').child(steamID).push({
-                    message: txtMessage
+                 userRef.child(steamID).once("value", function(snapshot){
+                    var data = snapshot.val();
+
+                    userRef.child(UserChatID).child('chats').child(steamID).push({
+                        message: txtMessage,
+                        name: data.name,
+                        pictureUrl: data.pictureURL
+                    });
                 });
             }
         }
