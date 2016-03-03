@@ -83,7 +83,6 @@ if(!isset($_SESSION['steamid'])) {
 
     var ref = new Firebase('https://steamportal.firebaseio.com/');
 
-        var runUpdate = 0;
         var userRef = ref.child("users");
         var steamname = $('#steam_name').val();
         var steamPicturUrl = $('#steam_pictureurl').val();
@@ -98,6 +97,13 @@ if(!isset($_SESSION['steamid'])) {
         });
 
         function startChat() {
+
+            if(UserChatID) {
+
+                console.log(UserChatID);
+             userRef.child(steamID).child('chats').child(UserChatID).off('child_added');
+             userRef.child(UserChatID).child('chats').child(steamID).off('child_added');
+            }
             $('#chatlog').empty();
             $('#chatterID').val($(this).attr('value'));
             UserChatID = $(this).attr('value');
@@ -129,18 +135,18 @@ if(!isset($_SESSION['steamid'])) {
                 })
             })
 
+            userRef.child(steamID).child('chats').child(UserChatID).limitToLast(1).on('child_added', function(DataSnapshot) {
+                        DataSnapshot = DataSnapshot.val();
+                        $('#chatlog').append("<p>" + DataSnapshot.name + ": " + DataSnapshot.message + "</p>");
+                    })
+            userRef.child(UserChatID).child('chats').child(steamID).limitToLast(1).on('child_added', function(DataSnapshot) {
+                        DataSnapshot = DataSnapshot.val();
+                        $('#chatlog').append("<p>" + DataSnapshot.name + ": " + DataSnapshot.message + "</p>");
+                    })
+
         }
 
         function sendChatMsg() {
-
-            userRef.child(steamID).child('chats').child(UserChatID).limitToLast(1).once('child_added', function(DataSnapshot) {
-                        DataSnapshot = DataSnapshot.val();
-                        $('#chatlog').append("<p>" + DataSnapshot.name + ": " + DataSnapshot.message + "</p>");
-                    })
-                    userRef.child(UserChatID).child('chats').child(steamID).limitToLast(1).once('child_added', function(DataSnapshot) {
-                        DataSnapshot = DataSnapshot.val();
-                        $('#chatlog').append("<p>" + DataSnapshot.name + ": " + DataSnapshot.message + "</p>");
-                    })
 
             var input = $("#chatTxtInput");
             var txtMessage = input.val();
