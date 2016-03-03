@@ -110,30 +110,37 @@ if(!isset($_SESSION['steamid'])) {
                         userRef.child(steamID).child('chats').child(UserChatID).once('value', function(ChatSnapshot) {
                             ChatSnapshot.forEach(function(childSnapshot) {
                                 childData = childSnapshot.val();
-                                if(childData != 1) {
                                     $('#chatlog').append("<p>" + childData.name + ": " + childData.message + "</p>");
-                                }
                             })
                         })
                     }
                     else if(snapshot2.hasChild(steamID)) {
                         $('#chatterID').val(UserChatID);
+                        userRef.child(UserChatID).child('chats').child(steamID).once('value', function(ChatSnapshot) {
+                            ChatSnapshot.forEach(function(childSnapshot) {
+                                childData = childSnapshot.val();
+                                    $('#chatlog').append("<p>" + childData.name + ": " + childData.message + "</p>");
+                            })
+                        })
                     }
                     else {
                         $('#chatterID').val(steamID);
                     }
                 })
             })
-            if(runUpdate == 0) {
-                    userRef.child(steamID).child('chats').child(UserChatID).limitToLast(1).on('child_added', function(DataSnapshot) {
-                        DataSnapshot = DataSnapshot.val();
-                        $('#chatlog').append("<p>" + DataSnapshot.name + ": " + DataSnapshot.message + "</p>");
-                    })
-                    runUpdate = 1;
-                }
+
         }
 
         function sendChatMsg() {
+
+            userRef.child(steamID).child('chats').child(UserChatID).limitToLast(1).once('child_added', function(DataSnapshot) {
+                        DataSnapshot = DataSnapshot.val();
+                        $('#chatlog').append("<p>" + DataSnapshot.name + ": " + DataSnapshot.message + "</p>");
+                    })
+                    userRef.child(UserChatID).child('chats').child(steamID).limitToLast(1).once('child_added', function(DataSnapshot) {
+                        DataSnapshot = DataSnapshot.val();
+                        $('#chatlog').append("<p>" + DataSnapshot.name + ": " + DataSnapshot.message + "</p>");
+                    })
 
             var input = $("#chatTxtInput");
             var txtMessage = input.val();
@@ -148,8 +155,8 @@ if(!isset($_SESSION['steamid'])) {
             } else {
                 userRef.child(UserChatID).child('chats').child(steamID).push({
                     message: txtMessage,
-                    name: data.name,
-                    pictureUrl: data.pictureURL
+                    name: "data.name",
+                    pictureUrl: "data.pictureURL"
                 });
             }
 
