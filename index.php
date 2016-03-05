@@ -62,21 +62,16 @@ if(!isset($_SESSION['steamid'])) {
     $content .= "<input id='steam_steamID' type='hidden' value='" . $_SESSION['steamid'] . "'>";
     $content .= "<input id='steam_pictureurl' type='hidden' value='" . $steamprofile['avatarfull'] . "'>";
     $content .= '<div id="sidebar">';
+    $content .= '<div class="profile-pic-wrap">';
     $content .= '<img id="profile_picture" src="'.$steamprofile['avatarfull'].'" title="" alt="" />';
-    $content .="<h2>Welcome " . $steamprofile['personaname'] . "</h2>";
+    $content .="<h2>" . $steamprofile['personaname'] . "</h2>";
     $content .= "<form action=\"steamauth/logout.php\" method=\"post\"><input value=\"Logout\" type=\"submit\" /></form>";
+    $content .= '</div>';
     $content .= '</div>';
 
     $content .= '<div id="friendlist">';
     $content .= '<h1 id="friendHeader">Friendslist</h1>';
     $content .= '<h2 id="chatter">a</h2>';
-    $content .= '<div id="chat">';
-    $content .= '<div id="chatlog" style="background-color: white; min-height: 200px; min-width: 200px; margin-bottom: 20px; margin-right: 50px;">';
-    $content .= '</div>';
-    $content .= '<input id="chatTxtInput" type="text" name="chatTxtInput" placeholder="Chat">';
-    $content .= '<p id="chatBtn" href="#">Send message</p>';
-    $content .= '<input type="hidden" id="chatterID" name="chatterID">';
-    $content .= '</div>';
     ?>
     <script type="text/javascript">
     window.onload = function() {
@@ -170,10 +165,15 @@ if(!isset($_SESSION['steamid'])) {
 
         $('.chatLink').on('click', startChat);
         $('#chatBtn').on('click', sendChatMsg);
+        $('.chatLink').on('click', function(){
+           $('#chat').toggle(); 
+        });
 
     }
     </script>
     <?php
+        
+        $content .= '<div class="friend-container">';
     foreach($steamprofile['friendlist'] as $key=>$friend)
     {
         /* Måste kika vidare på detta, vi får tillbaka en randomized array av vår friendListArray anrop via steam(den är alltid randomized). Måste synka arrayenerna så vi visar rätt date för rätt steamid.
@@ -188,6 +188,14 @@ if(!isset($_SESSION['steamid'])) {
         $content .= '</div>';
 
     }
+    $content .= '</div>';
+    $content .= '</div>';
+    $content .= '<div id="chat">';
+    $content .= '<div id="chatlog" style="min-height: 200px; min-width: 200px; margin-bottom: 20px; margin-right: 50px;">';
+    $content .= '</div>';
+    $content .= '<input id="chatTxtInput" type="text" name="chatTxtInput" placeholder="Chat">';
+    $content .= '<p id="chatBtn" href="#">Send message</p>';
+    $content .= '<input type="hidden" id="chatterID" name="chatterID">';
     $content .= '</div>';
     echo $content;
 }
