@@ -62,16 +62,24 @@ if(!isset($_SESSION['steamid'])) {
     $content .= "<input id='steam_steamID' type='hidden' value='" . $_SESSION['steamid'] . "'>";
     $content .= "<input id='steam_pictureurl' type='hidden' value='" . $steamprofile['avatarfull'] . "'>";
     $content .= '<div id="sidebar">';
+    $content .= '<div class="menu-bar">';
+    $content .= '<ul>';
+    $content .= '<li>Games</li>';
+    $content .= '<li>Friends</li>';
+    $content .= '<li>';
+    $content .= "<form action=\"steamauth/logout.php\" method=\"post\"><input value=\"Log out\" type=\"submit\" /></form>";
+    $content .= '</li>';
+    $content .= '<ul>';
+    $content .= '</div>';
     $content .= '<div class="profile-pic-wrap">';
     $content .= '<img id="profile_picture" src="'.$steamprofile['avatarfull'].'" title="" alt="" />';
     $content .="<h2>" . $steamprofile['personaname'] . "</h2>";
-    $content .= "<form action=\"steamauth/logout.php\" method=\"post\"><input value=\"Logout\" type=\"submit\" /></form>";
     $content .= '</div>';
     $content .= '</div>';
 
     $content .= '<div id="friendlist">';
     $content .= '<h1 id="friendHeader">Friendslist</h1>';
-    $content .= '<h2 id="chatter">a</h2>';
+    $content .= '<h2 id="chatter"></h2>';
     ?>
     <script type="text/javascript">
     window.onload = function() {
