@@ -199,7 +199,7 @@ header form #sign-in-btn
 .friendName
 {
     color: #05a06a;
-    font-size: 20px;
+    font-size: 16px;
     margin-left: 20px;
 }
 
@@ -208,6 +208,8 @@ header form #sign-in-btn
     position: relative;
     float: right;
     top: 75px;
+    font-family: "Open sans";
+    font-size: 14px;
 }
 
 #chatLog {
@@ -217,6 +219,10 @@ header form #sign-in-btn
     background-color: #1e1e1e;
     color: #fff;
     font-weight: 300;
+}
+
+#chatLog p {
+    margin-top: 8px;
 }
 
 #chatTxtInput {

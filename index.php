@@ -163,10 +163,13 @@ if(!isset($_SESSION['steamid'])) {
 
         }
 
+        
         $('.chatLink').on('click', startChat);
         $('#chatBtn').on('click', sendChatMsg);
+        
+        $('#chat').hide();
         $('.chatLink').on('click', function(){
-           $('#chat').toggle(); 
+           $('#chat').slideToggle(); 
         });
 
     }
