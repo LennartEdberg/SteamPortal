@@ -20,6 +20,7 @@ function file_get_contents_curl($url) {
         $UserGamesUrl = file_get_contents_curl("http://api.steampowered.com/IPlayerService/GetOwnedGames/v0001/?key=".$steamauth['apikey']."&steamid=".$_SESSION['steamid']."&include_appinfo=1&include_played_free_games=1&format=json");
         $content = json_decode($UserInfoUrl, true);
         $userFriendList = json_decode($UserFriendsUrl, true);
+        $usergames = json_decode($UserGamesUrl, true);
 
         $_SESSION['steam_games'] = $usergames['response']['games'];
         $_SESSION['steam_friendslist'] = $userFriendList['friendslist']['friends'];
