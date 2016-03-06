@@ -205,12 +205,13 @@ if(!isset($_SESSION['steamid'])) {
     $content .= '<div id="game-list">';
     foreach($steamprofile['games'] as $key=>$game) {
         $content .= '<div class="gameCell">';
-        $content .= '<h1>'.$game['name'].'</h1>';
         $content .= '<img src="https://steamcdn-a.akamaihd.net/steam/apps/'.$game['appid'].'/header.jpg" alt="'.$game['name'].'">';
+        $content .= '<div class="game-info">';
         $content .= '<p>Hours played: '.$game['playtime_forever'].'</p>';
         $content .= '<span class="viewAchievements" steamID="'.$steamprofile['steamid'].'" appid="'.$game['appid'].'">View achievements</span>';
+        $content .= '</div>';
+        $content .= '</div>';
     }
-    $content .= '</div>';
     $content .= '<div id="achievement-list">';
     $content .= '</div>';
     echo $content;

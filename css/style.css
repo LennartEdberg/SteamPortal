@@ -329,3 +329,43 @@ header form #sign-in-btn
     margin-bottom: 20px;
     color: #1e1e1e;
 }
+
+#game-list {
+    position: relative;
+    width: 50%;
+    left: 2%;
+    top: 30px;
+}
+
+#game-list .gameCell {
+    margin: 15px 5px 0 5px;
+    display: inline-block;
+    overflow: hidden;
+    -webkit-transition: all 0.3s ease-in-out;
+    -moz-transition: all 0.3s ease-in-out;
+    -o-transition: all 0.3s ease-in-out;
+    transition: all 0.3s ease-in-out;
+}
+
+.gameCell img {
+    width: 100%;
+    height: auto;
+    max-height: 215px;
+    -webkit-transition: all 0.3s ease-in-out;
+    -moz-transition: all 0.3s ease-in-out;
+    -o-transition: all 0.3s ease-in-out;
+    transition: all 0.3s ease-in-out;
+    cursor: pointer;
+    position: relative;
+    opacity: 1;
+}
+
+.gameCell img:hover {
+    opacity: 0.5;
+    -webkit-transform: scale(1.05);
+	transform: scale(1.05);
+}
+
+.gameCell .game-info {
+    display: none;
+}
