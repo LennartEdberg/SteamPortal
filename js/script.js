@@ -37,4 +37,9 @@ $(document).ready(function(){
             }, 200);
     });
     
+    $('.dashboardBtn').on('click', function(){
+        $('#friendlist').slideDown();
+        $('#game-list').show();
+    });
+    
 });

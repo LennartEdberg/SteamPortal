@@ -65,6 +65,7 @@ if(!isset($_SESSION['steamid'])) {
     $content .= '<div id="sidebar">';
     $content .= '<div class="menu-bar">';
     $content .= '<ul>';
+    $content .= '<li class="dashboardBtn">Dashboard</li>';
     $content .= '<li class="gamesBtn">Games</li>';
     $content .= '<li class="friendsBtn">Friends</li>';
     $content .= '<li>';

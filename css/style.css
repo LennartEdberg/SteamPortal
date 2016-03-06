@@ -330,8 +330,7 @@ header form #sign-in-btn
     top: 50%;
     transform: translateY(-50%);
     float: right;
-    width: 40%;
-    max-width: 400px;
+    width: 30%;
 }
 
 .menu-bar ul {
