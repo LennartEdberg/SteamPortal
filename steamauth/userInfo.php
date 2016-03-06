@@ -17,9 +17,12 @@ function file_get_contents_curl($url) {
     if (empty($_SESSION['steam_uptodate']) or $_SESSION['steam_uptodate'] == false or empty($_SESSION['steam_personaname'])) {
         $UserInfoUrl = file_get_contents_curl("http://api.steampowered.com/ISteamUser/GetPlayerSummaries/v0002/?key=".$steamauth['apikey']."&steamids=".$_SESSION['steamid']);
         $UserFriendsUrl = file_get_contents_curl("http://api.steampowered.com/ISteamUser/GetFriendList/v0001/?key=".$steamauth['apikey']."&steamid=".$_SESSION['steamid']."&relationship=friend");
+        $UserGamesUrl = file_get_contents_curl("http://api.steampowered.com/IPlayerService/GetOwnedGames/v0001/?key=".$steamauth['apikey']."&steamid=".$_SESSION['steamid']."&include_appinfo=1&include_played_free_games=1&format=json");
         $content = json_decode($UserInfoUrl, true);
         $userFriendList = json_decode($UserFriendsUrl, true);
+        $usergames = json_decode($UserGamesUrl, true);
 
+        $_SESSION['steam_games'] = $usergames['response']['games'];
         $_SESSION['steam_friendslist'] = $userFriendList['friendslist']['friends'];
         $_SESSION['steam_steamid'] = $content['response']['players'][0]['steamid'];
         $_SESSION['steam_communityvisibilitystate'] = $content['response']['players'][0]['communityvisibilitystate'];
@@ -41,6 +44,7 @@ function file_get_contents_curl($url) {
         $_SESSION['steam_uptodate'] == false;
     }
 
+    $steamprofile['games'] = $_SESSION['steam_games'];
     $steamprofile['friendlist'] = $_SESSION['steam_friendslist'];
     $steamprofile['steamid'] = $_SESSION['steam_steamid'];
     $steamprofile['communityvisibilitystate'] = $_SESSION['steam_communityvisibilitystate'];
@@ -60,6 +64,13 @@ function file_get_contents_curl($url) {
         $steamUserNamesUrl = file_get_contents_curl("http://api.steampowered.com/ISteamUser/GetPlayerSummaries/v0002/?key=41AF33A7F00028D1E153D748597DEEF3&steamids=".$steamID);
         $content = json_decode($steamUserNamesUrl, true);
         return $content['response']['players'];
+    }
+
+    if(isset($_GET['appid']) && isset($_GET['steamid'])) {
+            $steamAchievementsUrl = file_get_contents_curl("http://api.steampowered.com/ISteamUserStats/GetPlayerAchievements/v0001/?appid=".$_GET['appid']."&key=41AF33A7F00028D1E153D748597DEEF3&steamid=".$_GET['steamid']."&l=en&name=en");
+
+        echo $steamAchievementsUrl;
+
     }
 
 ?>

@@ -73,7 +73,7 @@ if(!isset($_SESSION['steamid'])) {
     $content .= '</div>';
     $content .= '<div class="profile-pic-wrap">';
     $content .= '<img id="profile_picture" src="'.$steamprofile['avatarfull'].'" title="" alt="" />';
-    $content .="<h2>" . $steamprofile['personaname'] . "</h2>";
+    $content .= "<h2>" . $steamprofile['personaname'] . "</h2>";
     $content .= '</div>';
     $content .= '</div>';
 
@@ -103,9 +103,8 @@ if(!isset($_SESSION['steamid'])) {
 
             if(UserChatID) {
 
-                console.log(UserChatID);
-             userRef.child(steamID).child('chats').child(UserChatID).off('child_added');
-             userRef.child(UserChatID).child('chats').child(steamID).off('child_added');
+                userRef.child(steamID).child('chats').child(UserChatID).off('child_added');
+                userRef.child(UserChatID).child('chats').child(steamID).off('child_added');
             }
             $('#chatlog').empty();
             $('#chatterID').val($(this).attr('value'));
@@ -169,13 +168,14 @@ if(!isset($_SESSION['steamid'])) {
                 });
             }
 
+            input.val('');
+
         }
 
         
         $('.chatLink').on('click', startChat);
         $('#chatBtn').on('click', sendChatMsg);
-        
-        $('#chat').hide();
+
         $('.chatLink').on('click', function(){
            $('#chat').slideToggle(); 
         });
@@ -185,28 +185,33 @@ if(!isset($_SESSION['steamid'])) {
     <?php
         
         $content .= '<div class="friend-container">';
-    foreach($steamprofile['friendlist'] as $key=>$friend)
-    {
-        /* Måste kika vidare på detta, vi får tillbaka en randomized array av vår friendListArray anrop via steam(den är alltid randomized). Måste synka arrayenerna så vi visar rätt date för rätt steamid.
-        $varDate = '';
-        $varDate = $friend['friend_since'];
-        $dt = new DateTime("@$varDate");
-        */
+    foreach($steamprofile['friendlist'] as $key=>$friend) {
         $content .= '<div class="friendCell">';
         $content .= '<span><img style="width: 40px; border-radius: 5px; vertical-align: middle;" src="' . $friendListArray[$key]['avatarfull'] . '"></span><span class="friendName">' . $friendListArray[$key]['personaname'] . '</span><br />';
-        /*$content .= '<h3>Friend since: '.$dt->format('Y-m-d').'</h3>';*/
         $content .= '<p class="chatLink" value="'.$friendListArray[$key]['steamid'].'">Chat</p>';
         $content .= '</div>';
 
     }
     $content .= '</div>';
     $content .= '</div>';
-    $content .= '<div id="chat">';
+    $content .= '<div id="chat" style="display: none;">';
     $content .= '<div id="chatlog" style="min-height: 200px; min-width: 200px; margin-bottom: 20px; margin-right: 50px;">';
     $content .= '</div>';
     $content .= '<input id="chatTxtInput" type="text" name="chatTxtInput" placeholder="Chat">';
     $content .= '<p id="chatBtn" href="#">Send message</p>';
     $content .= '<input type="hidden" id="chatterID" name="chatterID">';
+    $content .= '</div>';
+    //Överliggande div som täcker alla games, du kan placera denna var du vill!. Tycker denna bör visas som ett rutnät med bara bilder och sedan en hoover som gör dem lite mörkare/w.e.
+    $content .= '<div id="game-list">';
+    foreach($steamprofile['games'] as $key=>$game) {
+        $content .= '<div class="gameCell">';
+        $content .= '<h1>'.$game['name'].'</h1>';
+        $content .= '<img src="https://steamcdn-a.akamaihd.net/steam/apps/'.$game['appid'].'/header.jpg" alt="'.$game['name'].'">';
+        $content .= '<p>Hours played: '.$game['playtime_forever'].'</p>';
+        $content .= '<span class="viewAchievements" steamID="'.$steamprofile['steamid'].'" appid="'.$game['appid'].'">View achievements</span>';
+    }
+    $content .= '</div>';
+    $content .= '<div id="achievement-list">';
     $content .= '</div>';
     echo $content;
 }
