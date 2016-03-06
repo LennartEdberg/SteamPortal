@@ -337,6 +337,14 @@ header form #sign-in-btn
     top: 30px;
 }
 
+#game-list .gameListHeader {
+    font-size: 18px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: 8px;
+    color: #1e1e1e;
+}
+
 #game-list .gameCell {
     margin: 15px 5px 0 5px;
     display: inline-block;

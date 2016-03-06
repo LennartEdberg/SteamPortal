@@ -220,6 +220,7 @@ if(!isset($_SESSION['steamid'])) {
     $content .= '</div>';
     //Överliggande div som täcker alla games, du kan placera denna var du vill!. Tycker denna bör visas som ett rutnät med bara bilder och sedan en hoover som gör dem lite mörkare/w.e.
     $content .= '<div id="game-list">';
+    $content .= '<h2 class="gameListHeader">Your Games</h2>';
     foreach($steamprofile['games'] as $key=>$game) {
         $content .= '<div class="gameCell">';
         $content .= '<img src="https://steamcdn-a.akamaihd.net/steam/apps/'.$game['appid'].'/header.jpg" alt="'.$game['name'].'">';
