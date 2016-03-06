@@ -65,7 +65,7 @@ if(!isset($_SESSION['steamid'])) {
     $content .= '<div id="sidebar">';
     $content .= '<div class="menu-bar">';
     $content .= '<ul>';
-    $content .= '<li>Games</li>';
+    $content .= '<a href="#gameListHeader"><li>Games</li></a>';
     $content .= '<li>Friends</li>';
     $content .= '<li>';
     $content .= "<form action=\"steamauth/logout.php\" method=\"post\"><input value=\"Log out\" type=\"submit\" /></form>";
@@ -127,7 +127,7 @@ if(!isset($_SESSION['steamid'])) {
                             $('#chatlog').empty();
                             ChatSnapshot.forEach(function(childSnapshot) {
                                 childData = childSnapshot.val();
-                                    $('#chatlog').append("<p><span><img src='" + childData.pictureUrl + "' style='width: 30px; height: 30px;'></span>" + convertToDate(childData.time) + " - " + childData.name + ": " + childData.message + "</p>");
+                                    $('#chatlog').append("<span><img src='" + childData.pictureUrl + "'><p>" + convertToDate(childData.time) + " - " + childData.name + ": " + childData.message + "</p></span>");
                             })
                             $('#chatlog').scrollTop($('#chatlog')[0].scrollHeight);
                         })
@@ -138,7 +138,7 @@ if(!isset($_SESSION['steamid'])) {
                             $('#chatlog').empty();
                             ChatSnapshot.forEach(function(childSnapshot) {
                                 childData = childSnapshot.val();
-                                    $('#chatlog').append("<p><span><img src='" + childData.pictureUrl + "' style='width: 30px; height: 30px;'></span>" + convertToDate(childData.time) + " - " + childData.name + ": " + childData.message + "</p>");
+                                    $('#chatlog').append("<span><img src='" + childData.pictureUrl + "'><p>" + convertToDate(childData.time) + " - " + childData.name + ": " + childData.message + "</p></span>");
                             })
                             $('#chatlog').scrollTop($('#chatlog')[0].scrollHeight);
                         })
@@ -151,12 +151,12 @@ if(!isset($_SESSION['steamid'])) {
 
             userRef.child(steamID).child('chats').child(UserChatID).limitToLast(1).on('child_added', function(DataSnapshot) {
                         DataSnapshot = DataSnapshot.val();
-                        $('#chatlog').append("<p><span><img src='" + DataSnapshot.pictureUrl + "' style='width: 30px; height: 30px;'></span>" + convertToDate(DataSnapshot.time) + " - " + DataSnapshot.name + ": " + DataSnapshot.message + "</p>");
+                        $('#chatlog').append("<img src='" + DataSnapshot.pictureUrl + "'></span><p>" + convertToDate(DataSnapshot.time) + " - " + DataSnapshot.name + ": " + DataSnapshot.message + "</p><span>");
                         $('#chatlog').scrollTop($('#chatlog')[0].scrollHeight);
                     })
             userRef.child(UserChatID).child('chats').child(steamID).limitToLast(1).on('child_added', function(DataSnapshot) {
                         DataSnapshot = DataSnapshot.val();
-                        $('#chatlog').append("<p><span><img src='" + DataSnapshot.pictureUrl + "' style='width: 30px; height: 30px;'></span>" + convertToDate(DataSnapshot.time) + " - " + DataSnapshot.name + ": " + DataSnapshot.message + "</p>");
+                        $('#chatlog').append("<img src='" + DataSnapshot.pictureUrl + "'></span><p><span>" + convertToDate(DataSnapshot.time) + " - " + DataSnapshot.name + ": " + DataSnapshot.message + "</p>");
                         $('#chatlog').scrollTop($('#chatlog')[0].scrollHeight);
                     })
         }
@@ -213,7 +213,6 @@ if(!isset($_SESSION['steamid'])) {
 
     }
     $content .= '</div>';
-    $content .= '</div>';
     $content .= '<div id="chat" style="display: none;">';
     $content .= '<div id="chatlog" style="min-height: 200px; min-width: 200px; margin-bottom: 20px; margin-right: 50px;">';
     $content .= '</div>';
@@ -221,9 +220,10 @@ if(!isset($_SESSION['steamid'])) {
     $content .= '<p id="chatBtn" href="#">Send message</p>';
     $content .= '<input type="hidden" id="chatterID" name="chatterID">';
     $content .= '</div>';
+    $content .= '</div>';
     //Överliggande div som täcker alla games, du kan placera denna var du vill!. Tycker denna bör visas som ett rutnät med bara bilder och sedan en hoover som gör dem lite mörkare/w.e.
     $content .= '<div id="game-list">';
-    $content .= '<h2 class="gameListHeader">Your Games</h2>';
+    $content .= '<h2 id="gameListHeader">Your Games</h2>';
     foreach($steamprofile['games'] as $key=>$game) {
         if($game['img_logo_url'] && $game['has_community_visible_stats'] >= 0) {
             $content .= '<div class="gameCell">';

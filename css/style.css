@@ -13,6 +13,10 @@ body
     font-family: 'Montserrat', sans-serif;
 }
 
+a {
+    color: #05a06a;
+}
+
 /* LOGIN PAGE CSS */
 
 header {
@@ -97,11 +101,11 @@ header form #sign-in-btn
 
 .friend-container {
     position: relative;
-    right: 5%;
     overflow-y: scroll;
     max-height: 600px;
     width: 400px;
     background: #252525;
+    float: left;
 }
 
 .friends-text {
@@ -144,7 +148,9 @@ header form #sign-in-btn
 {
     position: relative;
     display: block;
-    float: right;
+    width: 100%;
+    height: auto;
+    padding-bottom: 100px;
 }
 
 .friendCell
@@ -181,17 +187,16 @@ header form #sign-in-btn
 }
 
 #chat {
-    width: 26%;
+    width: 78%;
     position: relative;
-    float: right;
-    top: 75px;
     font-family: "Open sans";
     font-size: 14px;
+    float: right;
 }
 
 #chatLog {
     overflow-y: scroll;
-    max-height: 300px;
+    max-height: 500px;
     padding: 10px;
     background-color: #1e1e1e;
     color: #fff;
@@ -262,12 +267,19 @@ header form #sign-in-btn
     right: 10px;
 }
 
-#chatLog p span img {
-    width: 30px;
-    height: 30px;
+#chatLog span {
+    display: block;
+    position: relative;
+}
+
+#chatLog span img {
+    width: 60px;
+    height: 60px;
     margin-left: 10px;
+    margin-right: 15px;
     border-radius: 5px;
     margin-top: 4px;
+    display: inline-block;
 }
 
 #chatLog p {
@@ -275,6 +287,11 @@ header form #sign-in-btn
     max-width: 70%;
     border-radius: 10px;
     padding: 5px;
+    display: inline-block;
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+    vertical-align: bottom;
 }
 
 #sidebar
@@ -361,35 +378,38 @@ header form #sign-in-btn
     font-size: 18px;
     text-transform: uppercase;
     letter-spacing: 2px;
-    text-align: center;
     margin-top: 30px;
+    margin-left: 22px;
     margin-bottom: 20px;
     color: #1e1e1e;
 }
 
 #game-list {
     position: relative;
-    width: 50%;
-    left: 2%;
-    top: 30px;
+    width: 100%;
+    display: block;
+    text-align: center;
+    top: 80px;
+    margin: 0 auto;
+    clear: both;
 }
 
-#game-list .gameListHeader {
-    font-size: 18px;
+#game-list #gameListHeader {
+    font-size: 22px;
     text-transform: uppercase;
     letter-spacing: 2px;
-    margin-bottom: 8px;
+    margin-bottom: 40px;
     color: #1e1e1e;
 }
 
 #game-list .gameCell {
-    margin: 15px 5px 0 5px;
     display: inline-block;
     overflow: hidden;
     -webkit-transition: all 0.3s ease-in-out;
     -moz-transition: all 0.3s ease-in-out;
     -o-transition: all 0.3s ease-in-out;
     transition: all 0.3s ease-in-out;
+    margin: 3px;
 }
 
 .gameCell img {
