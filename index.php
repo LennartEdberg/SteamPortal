@@ -164,7 +164,7 @@ if(!isset($_SESSION['steamid'])) {
         function sendChatMsg() {
 
             var input = $("#chatTxtInput");
-            var txtMessage = input.val();
+            var txtMessage = $("<div/>").html(input.val()).text();
 
             if($('#chatterID').val() == steamID) {
                 userRef.child(steamID).once('value', function(snapshot) {
