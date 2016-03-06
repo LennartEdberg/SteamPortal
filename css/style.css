@@ -248,7 +248,8 @@ header form #sign-in-btn
 }
 
 .friendCell:hover .chatLink {
-    color: #000;
+    color: #05a06a;
+    opacity: 0.8;
 }
 
 #chatLog p span img {
