@@ -165,6 +165,7 @@ header form #sign-in-btn
     -o-transition: all 0.1s ease-in-out;
     transition: all 0.1s ease-in-out;
     cursor: pointer;
+    overflow: hidden;
 }
 
 .friendCell:hover {
@@ -244,12 +245,16 @@ header form #sign-in-btn
     float: right;
     position: relative;
     padding: 10px;
-    color: #1e1e1e;
+    right: -60px;
+    -webkit-transition: all 0.3s ease-in-out;
+    -moz-transition: all 0.3s ease-in-out;
+    -o-transition: all 0.3s ease-in-out;
+    transition: all 0.3s ease-in-out;
 }
 
 .friendCell:hover .chatLink {
     color: #05a06a;
-    opacity: 0.8;
+    right: 10px;
 }
 
 #chatLog p span img {
