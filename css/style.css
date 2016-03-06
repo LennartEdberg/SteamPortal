@@ -17,6 +17,10 @@ a {
     color: #05a06a;
 }
 
+.hej {
+    display: none;
+}
+
 /* LOGIN PAGE CSS */
 
 header {
@@ -147,7 +151,6 @@ header form #sign-in-btn
 #friendlist
 {
     position: relative;
-    display: block;
     width: 100%;
     height: auto;
     padding-bottom: 100px;

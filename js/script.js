@@ -23,4 +23,18 @@ $(document).ready(function(){
         });
     });
 //Hämta alla items -> http://steamcommunity.com/profiles/76561197995308584/inventory/json/730/2
+    
+    $('.gamesBtn').on('click', function(){
+        console.log(123);
+       $('#game-list').show();
+       $('#friendlist').slideUp();
+    });
+    
+    $('.friendsBtn').on('click', function(){
+        $('#friendlist').slideDown();
+            setTimeout(function(){
+              $('#game-list').hide();  
+            }, 200);
+    });
+    
 });
