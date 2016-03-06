@@ -254,11 +254,16 @@ header form #sign-in-btn
     text-transform: uppercase;
     font-size: 13px;
     letter-spacing: 1px;
+    border-radius: 5px;
 }
 
 .friendCell:hover .chatLink {
     color: #fff;
     right: 10px;
+}
+
+.chatLink:hover {
+    background-color: #252525;
 }
 
 #chatLog p span img {
