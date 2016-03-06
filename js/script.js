@@ -22,7 +22,5 @@ $(document).ready(function(){
             }
         });
     });
-
-
-
+//Hämta alla items -> http://steamcommunity.com/profiles/76561197995308584/inventory/json/730/2
 });
