@@ -222,9 +222,9 @@ if(!isset($_SESSION['steamid'])) {
     $content .= '<div id="game-list">';
     $content .= '<h2 class="gameListHeader">Your Games</h2>';
     foreach($steamprofile['games'] as $key=>$game) {
-        if($game['img_logo_url'] && isset($game['has_community_visible_stats'])) {
+        if($game['img_logo_url'] && $game['has_community_visible_stats'] >= 0) {
             $content .= '<div class="gameCell">';
-            $content .= '<img src="https://steamcdn-a.akamaihd.net/steam/apps/'.$game['appid'].'/header.jpg" alt="'.$game['name'].'">';
+            $content .= '<img src="https://steamcdn-a.akamaihd.net/steam/apps/'.$game['appid'].'/header.jpg" alt="'.$game['name'].'" style="min-width: 460px;">';
             $content .= '<div class="game-info">';
             $content .= '<p>Hours played: '.$game['playtime_forever'].'</p>';
             $content .= '<span class="viewAchievements" steamID="'.$steamprofile['steamid'].'" appid="'.$game['appid'].'">View achievements</span>';
