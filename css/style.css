@@ -166,6 +166,7 @@ header form #sign-in-btn
     transition: all 0.1s ease-in-out;
     cursor: pointer;
     overflow: hidden;
+    font-family: 'Open Sans';
 }
 
 .friendCell:hover {
@@ -250,10 +251,13 @@ header form #sign-in-btn
     -moz-transition: all 0.3s ease-in-out;
     -o-transition: all 0.3s ease-in-out;
     transition: all 0.3s ease-in-out;
+    text-transform: uppercase;
+    font-size: 13px;
+    letter-spacing: 1px;
 }
 
 .friendCell:hover .chatLink {
-    color: #05a06a;
+    color: #fff;
     right: 10px;
 }
 
