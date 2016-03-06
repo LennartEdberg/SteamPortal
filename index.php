@@ -204,7 +204,7 @@ if(!isset($_SESSION['steamid'])) {
         $content .= '<div class="friend-container">';
     foreach($steamprofile['friendlist'] as $key=>$friend) {
         $content .= '<div class="friendCell">';
-        $content .= '<span><img style="width: 40px; border-radius: 5px; vertical-align: middle;" src="' . $friendListArray[$key]['avatarfull'] . '"></span><span class="friendName">' . $friendListArray[$key]['personaname'] . '</span><br />';
+        $content .= '<span><img style="width: 40px; border-radius: 5px; vertical-align: middle;" src="' . $friendListArray[$key]['avatarfull'] . '"></span><span class="friendName">' . $friendListArray[$key]['personaname'] . '</span>';
         $content .= '<p class="chatLink" value="'.$friendListArray[$key]['steamid'].'">Chat</p>';
         $content .= '</div>';
 

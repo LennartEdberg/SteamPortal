@@ -155,8 +155,8 @@ header form #sign-in-btn
     margin-top: 10px;
     margin-bottom: 10px;
     margin-right: 10px;
-    padding-top: 5px;
-    padding-bottom: 5px;
+    padding-top: 10px;
+    padding-bottom: 10px;
     padding-left: 5px;
     border-radius: 3px;
     margin: 5px auto;
@@ -238,6 +238,15 @@ header form #sign-in-btn
 
 #chatBtn:hover {
     opacity: 0.8;
+}
+
+.chatLink {
+    float: right;
+    position: relative;
+    padding: 10px;
+}
+
+#chatLog p span img {
 }
 
 #sidebar
