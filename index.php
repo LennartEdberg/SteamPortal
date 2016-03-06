@@ -66,7 +66,7 @@ if(!isset($_SESSION['steamid'])) {
     $content .= '<div class="menu-bar">';
     $content .= '<ul>';
     $content .= '<a href="#gameListHeader"><li>Games</li></a>';
-    $content .= '<li>Friends</li>';
+    $content .= '<a href="#friendHeader"><li>Friends</li></a>';
     $content .= '<li>';
     $content .= "<form action=\"steamauth/logout.php\" method=\"post\"><input value=\"Log out\" type=\"submit\" /></form>";
     $content .= '</li>';
