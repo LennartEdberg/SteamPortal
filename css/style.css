@@ -166,7 +166,7 @@ header form #sign-in-btn
     transition: all 0.1s ease-in-out;
     cursor: pointer;
     overflow: hidden;
-    font-family: 'Open Sans';
+    font-weight: 400;
 }
 
 .friendCell:hover {
@@ -260,10 +260,6 @@ header form #sign-in-btn
 .friendCell:hover .chatLink {
     color: #05a06a;
     right: 10px;
-}
-
-.chatLink:hover {
-    background-color: #252525;
 }
 
 #chatLog p span img {
