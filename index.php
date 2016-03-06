@@ -129,6 +129,7 @@ if(!isset($_SESSION['steamid'])) {
                                 childData = childSnapshot.val();
                                     $('#chatlog').append("<p><span><img src='" + childData.pictureUrl + "' style='width: 30px; height: 30px;'></span>" + convertToDate(childData.time) + " - " + childData.name + ": " + childData.message + "</p>");
                             })
+                            $('#chatlog').scrollTop($('#chatlog')[0].scrollHeight);
                         })
                     }
                     else if(snapshot2.hasChild(steamID)) {
@@ -139,6 +140,7 @@ if(!isset($_SESSION['steamid'])) {
                                 childData = childSnapshot.val();
                                     $('#chatlog').append("<p><span><img src='" + childData.pictureUrl + "' style='width: 30px; height: 30px;'></span>" + convertToDate(childData.time) + " - " + childData.name + ": " + childData.message + "</p>");
                             })
+                            $('#chatlog').scrollTop($('#chatlog')[0].scrollHeight);
                         })
                     }
                     else {
@@ -150,12 +152,13 @@ if(!isset($_SESSION['steamid'])) {
             userRef.child(steamID).child('chats').child(UserChatID).limitToLast(1).on('child_added', function(DataSnapshot) {
                         DataSnapshot = DataSnapshot.val();
                         $('#chatlog').append("<p><span><img src='" + DataSnapshot.pictureUrl + "' style='width: 30px; height: 30px;'></span>" + convertToDate(DataSnapshot.time) + " - " + DataSnapshot.name + ": " + DataSnapshot.message + "</p>");
+                        $('#chatlog').scrollTop($('#chatlog')[0].scrollHeight);
                     })
             userRef.child(UserChatID).child('chats').child(steamID).limitToLast(1).on('child_added', function(DataSnapshot) {
                         DataSnapshot = DataSnapshot.val();
                         $('#chatlog').append("<p><span><img src='" + DataSnapshot.pictureUrl + "' style='width: 30px; height: 30px;'></span>" + convertToDate(DataSnapshot.time) + " - " + DataSnapshot.name + ": " + DataSnapshot.message + "</p>");
+                        $('#chatlog').scrollTop($('#chatlog')[0].scrollHeight);
                     })
-
         }
 
         function sendChatMsg() {
@@ -185,7 +188,6 @@ if(!isset($_SESSION['steamid'])) {
                 });
             }
             input.val('');
-
         }
 
         
