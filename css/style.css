@@ -263,6 +263,18 @@ header form #sign-in-btn
 }
 
 #chatLog p span img {
+    width: 30px;
+    height: 30px;
+    margin-left: 10px;
+    border-radius: 5px;
+    margin-top: 4px;
+}
+
+#chatLog p {
+    background: #252525;
+    max-width: 70%;
+    border-radius: 10px;
+    padding: 5px;
 }
 
 #sidebar
