@@ -22,6 +22,8 @@ function file_get_contents_curl($url) {
         $userFriendList = json_decode($UserFriendsUrl, true);
         $usergames = json_decode($UserGamesUrl, true);
 
+        usort($usergames['response']['games'], "cmp");
+
         $_SESSION['steam_games'] = $usergames['response']['games'];
         $_SESSION['steam_friendslist'] = $userFriendList['friendslist']['friends'];
         $_SESSION['steam_steamid'] = $content['response']['players'][0]['steamid'];
@@ -64,6 +66,14 @@ function file_get_contents_curl($url) {
         $steamUserNamesUrl = file_get_contents_curl("http://api.steampowered.com/ISteamUser/GetPlayerSummaries/v0002/?key=41AF33A7F00028D1E153D748597DEEF3&steamids=".$steamID);
         $content = json_decode($steamUserNamesUrl, true);
         return $content['response']['players'];
+    }
+
+    function compare_firstname($a, $b) {
+        return strnatcmp($a['personaname'], $b['personaname']);
+    }
+
+    function cmp($a, $b) {
+        return $b['playtime_forever'] - $a['playtime_forever'];
     }
 
     if(isset($_GET['appid']) && isset($_GET['steamid'])) {

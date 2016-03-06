@@ -53,6 +53,7 @@ if(!isset($_SESSION['steamid'])) {
         }
 
     $friendListArray = getSteamNames($steamfriendIDs);
+    usort($friendListArray, 'compare_firstname');
     foreach($steamprofile['friendlist'] as $key=>$friend) {
         $cleanFriendArray[] = $friend['steamid'];
     }
