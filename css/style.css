@@ -212,6 +212,8 @@ header form #sign-in-btn
     border: none;
     color: #fff;
     padding: 5px;
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 600;
 }
 
 #chatTxtInput:focus {
