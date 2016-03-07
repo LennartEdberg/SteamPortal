@@ -65,10 +65,19 @@ function file_get_contents_curl($url) {
     function getSteamNames($steamID) {
         $steamUserNamesUrl = file_get_contents_curl("http://api.steampowered.com/ISteamUser/GetPlayerSummaries/v0002/?key=41AF33A7F00028D1E153D748597DEEF3&steamids=".$steamID);
         $content = json_decode($steamUserNamesUrl, true);
-        $pieces = explode(",%", $steamID);
+        $pieces = explode(",%20", $steamID);
         if(count($pieces) > 99) {
-            for($x = 100; $x <= count($pieces); $x++) {
-                $steamfriendsExtended .= $pieces[$x] . ',%';
+            for($x = 100; $x <= count($pieces) - 2; $x++) {
+                if($x >= count($pieces) - 2) {
+                    $steamfriendsExtended .= $pieces[$x];
+                } else {
+                    $steamfriendsExtended .= $pieces[$x] . ',%20';
+                }
+            }
+        $steamfriendsExtendedUrl = file_get_contents_curl("http://api.steampowered.com/ISteamUser/GetPlayerSummaries/v0002/?key=41AF33A7F00028D1E153D748597DEEF3&steamids=".$steamfriendsExtended);
+        $steamfriendsExtendedContent = json_decode($steamfriendsExtendedUrl, true);
+            foreach($steamfriendsExtendedContent['response']['players'] as $player) {
+                array_push($content['response']['players'], $player);
             }
 
         }
