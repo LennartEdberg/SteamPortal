@@ -9,7 +9,7 @@
 body
 {
 /*    background-color: #2a2939;*/
-    background-color: #252525;
+    background: #252C33;
     font-family: 'Montserrat', sans-serif;
 }
 
@@ -108,7 +108,7 @@ header form #sign-in-btn
     overflow-y: scroll;
     max-height: 600px;
     width: 400px;
-    background: #252525;
+    background: rgba(27,35,42,0.9);
     float: left;
 }
 
@@ -154,12 +154,13 @@ header form #sign-in-btn
     width: 100%;
     height: auto;
     padding-bottom: 100px;
+    left: 0.5%;
 }
 
 .friendCell
 {
     width: 90%;
-    background-color: #252525;
+    background: rgba(27,35,42,0.9);
     height: auto;
     margin-top: 10px;
     margin-bottom: 10px;
@@ -179,7 +180,7 @@ header form #sign-in-btn
 }
 
 .friendCell:hover {
-    background-color: #1a1b1d;
+    background: #252C33;
 }
 
 .friendName
@@ -192,7 +193,6 @@ header form #sign-in-btn
 #chat {
     width: 78%;
     position: relative;
-    font-family: "Open sans";
     font-size: 14px;
     float: right;
 }
@@ -201,26 +201,19 @@ header form #sign-in-btn
     overflow-y: scroll;
     max-height: 500px;
     padding: 10px;
-    background-color: #1e1e1e;
+    background: #252C33;
     color: #fff;
     font-weight: 300;
 }
 
-#chatLog p {
-    margin-top: 8px;
-}
-
 #chatTxtInput {
-    width: 300px;
+    width: 96%;
+    max-width: 96%;
     height: 40px;
-    background-color: #1e1e1e;
+    background: rgba(27,35,42,0.9);
     border: none;
     color: #fff;
     padding: 5px;
-    -webkit-transition: all 0.3s ease-in-out;
-    -moz-transition: all 0.3s ease-in-out;
-    -o-transition: all 0.3s ease-in-out;
-    transition: all 0.3s ease-in-out;
 }
 
 #chatTxtInput:focus {
@@ -229,8 +222,8 @@ header form #sign-in-btn
 }
 
 #chatBtn {
-    background-color: #1e1e1e;
-    width: 300px;
+    background: rgba(27,35,42,0.9);
+    max-width: 96%;
     height: 40px;
     margin: 10px 0 0 0;
     text-align: center;
@@ -273,6 +266,7 @@ header form #sign-in-btn
 #chatLog span {
     display: block;
     position: relative;
+    padding: 10px 0 10px 0;
 }
 
 #chatLog span img {
@@ -285,16 +279,17 @@ header form #sign-in-btn
     display: inline-block;
 }
 
-#chatLog p {
-    background: #252525;
+#chatLog span p {
+    background: #eef8ff;
+    color: #34495E;
     max-width: 70%;
     border-radius: 10px;
-    padding: 5px;
+    padding: 15px;
     display: inline-block;
     position: relative;
-    top: 50%;
-    transform: translateY(-50%);
-    vertical-align: bottom;
+    word-wrap: break-word;
+    font-family: 'Open Sans';
+    font-weight: 400;
 }
 
 #sidebar
@@ -302,6 +297,7 @@ header form #sign-in-btn
     width: 100%;
     height: 120px;
     background: #1e1e1e;
+    background: rgba(27,35,42,0.9);
 }
 
 .profile-pic-wrap {
@@ -309,7 +305,7 @@ header form #sign-in-btn
     position: relative;
     left: 2%;
     text-align: center;
-    color: #05a06a;
+    color: #fff;
     top: 50%;
     transform: translateY(-50%);
 }
@@ -348,17 +344,18 @@ header form #sign-in-btn
     -o-transition: all 0.2s ease-in-out;
     transition: all 0.2s ease-in-out;
     cursor: pointer;
+    color: #fff;
 }
 
 .menu-bar ul li:hover {
-    color: #252525;
+    color: #252C33;
 }
 
 .menu-bar input[type="submit"] {
     width: 115px;
     height: 35px;
     border: none;
-    background: #252525;
+    background: #252C33;
     text-transform: uppercase;
     font-weight: bold;
     font-size: 16px;
@@ -372,7 +369,7 @@ header form #sign-in-btn
 }
 
 .menu-bar input[type="submit"]:hover {
-    background: #1e1e1e;
+    background: rgba(27,35,42,0.9);
     color: #D64541;
 }
 
@@ -383,7 +380,7 @@ header form #sign-in-btn
     margin-top: 30px;
     margin-left: 22px;
     margin-bottom: 20px;
-    color: #1e1e1e;
+    color: rgba(27,35,42,0.9);
 }
 
 #game-list {
@@ -401,7 +398,7 @@ header form #sign-in-btn
     text-transform: uppercase;
     letter-spacing: 2px;
     margin-bottom: 40px;
-    color: #1e1e1e;
+    color: rgba(27,35,42,0.9);
 }
 
 #game-list .gameCell {

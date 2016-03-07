@@ -152,12 +152,12 @@ if(!isset($_SESSION['steamid'])) {
 
             userRef.child(steamID).child('chats').child(UserChatID).limitToLast(1).on('child_added', function(DataSnapshot) {
                         DataSnapshot = DataSnapshot.val();
-                        $('#chatlog').append("<img src='" + DataSnapshot.pictureUrl + "'></span><p>" + convertToDate(DataSnapshot.time) + " - " + DataSnapshot.name + ": " + DataSnapshot.message + "</p><span>");
+                        $('#chatlog').append("<span><img src='" + DataSnapshot.pictureUrl + "'><p>" + convertToDate(DataSnapshot.time) + " - " + DataSnapshot.name + ": " + DataSnapshot.message + "</p></span>");
                         $('#chatlog').scrollTop($('#chatlog')[0].scrollHeight);
                     })
             userRef.child(UserChatID).child('chats').child(steamID).limitToLast(1).on('child_added', function(DataSnapshot) {
                         DataSnapshot = DataSnapshot.val();
-                        $('#chatlog').append("<img src='" + DataSnapshot.pictureUrl + "'></span><p><span>" + convertToDate(DataSnapshot.time) + " - " + DataSnapshot.name + ": " + DataSnapshot.message + "</p>");
+                        $('#chatlog').append("<span><img src='" + DataSnapshot.pictureUrl + "'><p>" + convertToDate(DataSnapshot.time) + " - " + DataSnapshot.name + ": " + DataSnapshot.message + "</p></span>");
                         $('#chatlog').scrollTop($('#chatlog')[0].scrollHeight);
                     })
         }
@@ -217,7 +217,7 @@ if(!isset($_SESSION['steamid'])) {
     $content .= '<div id="chat" style="display: none;">';
     $content .= '<div id="chatlog" style="min-height: 200px; min-width: 200px; margin-bottom: 20px; margin-right: 50px;">';
     $content .= '</div>';
-    $content .= '<input id="chatTxtInput" type="text" name="chatTxtInput" placeholder="Chat">';
+    $content .= '<textarea id="chatTxtInput" type="text" name="chatTxtInput" placeholder="Chat"></textarea>';
     $content .= '<p id="chatBtn" href="#">Send message</p>';
     $content .= '<input type="hidden" id="chatterID" name="chatterID">';
     $content .= '</div>';
