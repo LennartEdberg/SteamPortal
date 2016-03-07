@@ -31,6 +31,17 @@ $(document).ready(function(){
             }
         });
     });
+
+    $("#itemClick").on('click', function() {
+        $("#item-list").empty();
+        var steamID = $(this).attr('steamid');
+
+        $.get("steamauth/userInfo.php?items=1&steamid=" + steamID, function(data, status){
+            console.log(data);
+            console.log(status);
+        });
+
+    });
 //Hämta alla items -> http://steamcommunity.com/profiles/76561197995308584/inventory/json/730/2
     
     $('.gamesBtn').on('click', function(){

@@ -244,6 +244,9 @@ if(!isset($_SESSION['steamid'])) {
     }
     $content .= '<div id="achievement-list">';
     $content .= '</div>';
+    $content .= '<div id="item-list">';
+    $content .= '<p id="itemClick" steamID="'.$steamprofile['steamid'].'">Click me for ITEMZ</p>';
+    $content .= '</div>';
     echo $content;
 }
 ?>
