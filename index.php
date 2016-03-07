@@ -128,7 +128,7 @@ if(!isset($_SESSION['steamid'])) {
                             $('#chatlog').empty();
                             ChatSnapshot.forEach(function(childSnapshot) {
                                 childData = childSnapshot.val();
-                                    $('#chatlog').append("<span><img src='" + childData.pictureUrl + "'><p>" + convertToDate(childData.time) + " - " + childData.name + ": " + childData.message + "</p></span>");
+                                    $('#chatlog').append("<ul><li class='chatImg'><img src='" + childData.pictureUrl + "'></li><li class='chatMsg'><p><span class='chatName'>" + childData.name + "<time>" + convertToDate(childData.time) + "</time></span>" + childData.message + "</p></li></ul>");
                             })
                             $('#chatlog').scrollTop($('#chatlog')[0].scrollHeight);
                         })
@@ -139,7 +139,7 @@ if(!isset($_SESSION['steamid'])) {
                             $('#chatlog').empty();
                             ChatSnapshot.forEach(function(childSnapshot) {
                                 childData = childSnapshot.val();
-                                    $('#chatlog').append("<span><img src='" + childData.pictureUrl + "'><p>" + convertToDate(childData.time) + " - " + childData.name + ": " + childData.message + "</p></span>");
+                                    $('#chatlog').append("<ul><li class='chatImg'><img src='" + childData.pictureUrl + "'></li><li class='chatMsg'><p><span class='chatName'>" + childData.name + "<time>" + convertToDate(childData.time) + "</time></span>" + childData.message + "</p></span></li></ul>");
                             })
                             $('#chatlog').scrollTop($('#chatlog')[0].scrollHeight);
                         })
@@ -152,12 +152,12 @@ if(!isset($_SESSION['steamid'])) {
 
             userRef.child(steamID).child('chats').child(UserChatID).limitToLast(1).on('child_added', function(DataSnapshot) {
                         DataSnapshot = DataSnapshot.val();
-                        $('#chatlog').append("<span><img src='" + DataSnapshot.pictureUrl + "'><p>" + convertToDate(DataSnapshot.time) + " - " + DataSnapshot.name + ": " + DataSnapshot.message + "</p></span>");
+                        $('#chatlog').append("<ul><li class='chatImg'><img src='" + DataSnapshot.pictureUrl + "'></li><li class='chatMsg'><p><span class='chatMsg'>" + DataSnapshot.name + "<time>" + convertToDate(childData.time) + "</time></span>" + DataSnapshot.message + "</p></span></li></ul>");
                         $('#chatlog').scrollTop($('#chatlog')[0].scrollHeight);
                     })
             userRef.child(UserChatID).child('chats').child(steamID).limitToLast(1).on('child_added', function(DataSnapshot) {
                         DataSnapshot = DataSnapshot.val();
-                        $('#chatlog').append("<span><img src='" + DataSnapshot.pictureUrl + "'><p>" + convertToDate(DataSnapshot.time) + " - " + DataSnapshot.name + ": " + DataSnapshot.message + "</p></span>");
+                        $('#chatlog').append("<ul><li class='chatImg'><span><img src='" + DataSnapshot.pictureUrl + "'></li><li class='chatMsg'><p><span class='chatName'>" + DataSnapshot.name + "<time>" + convertToDate(childData.time) + "</time></span>" + DataSnapshot.message + "</p></span></li></ul>");
                         $('#chatlog').scrollTop($('#chatlog')[0].scrollHeight);
                     })
         }

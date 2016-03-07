@@ -263,13 +263,16 @@ header form #sign-in-btn
     right: 10px;
 }
 
-#chatLog span {
+#chatLog ul {
     display: block;
     position: relative;
+    max-width: 90%;
     padding: 10px 0 10px 0;
+    list-style: none;
+    margin: 0;
 }
 
-#chatLog span img {
+#chatLog ul img {
     width: 60px;
     height: 60px;
     margin-left: 10px;
@@ -279,17 +282,39 @@ header form #sign-in-btn
     display: inline-block;
 }
 
-#chatLog span p {
+#chatLog li {
+    display: inline-block;
+    vertical-align: middle;
+}
+
+#chatLog .chatMsg {
+    max-width: 90%;
+}
+
+#chatLog .chatMsg p {
     background: #eef8ff;
     color: #34495E;
-    max-width: 70%;
-    border-radius: 10px;
-    padding: 15px;
+    max-width: 90%;
+    min-width: 200px;
+    border-radius: 5px;
+    padding: 10px;
     display: inline-block;
     position: relative;
     word-wrap: break-word;
     font-family: 'Open Sans';
     font-weight: 400;
+}
+
+#chatLog .chatMsg p .chatName time {
+    float: right;
+    font-weight: 400;
+    color: #999;
+}
+
+#chatLog .chatMsg p .chatName {
+    font-weight: 700;
+    display: block;
+    padding-bottom: 10px;
 }
 
 #sidebar
