@@ -37,7 +37,7 @@ $(document).ready(function(){
         var steamID = $(this).attr('steamid');
 
         $.get("steamauth/userInfo.php?items=1&steamid=" + steamID, function(data, status){
-            console.log(data);
+            console.log(JSON.parse(data));
             console.log(status);
         });
 

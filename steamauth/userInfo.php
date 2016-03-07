@@ -105,8 +105,15 @@ function file_get_contents_curl($url) {
     }
 
     if(isset($_GET['items']) && isset($_GET['steamid'])) {
-        $games = $_SESSION['steam_games'];
-        echo $games;
+        $gamesUrl = file_get_contents_curl("http://api.steampowered.com/IPlayerService/GetOwnedGames/v0001/?key=41AF33A7F00028D1E153D748597DEEF3&steamid=".$_GET['steamid']."&include_appinfo=1&include_played_free_games=1&format=json");
+        $games = json_decode($gamesUrl, true);
+        foreach($games['response']['games'] as $game=>$key) {
+            $data = file_get_contents_curl("http://steamcommunity.com/profiles/".$_GET['steamid']."/inventory/json/".$game['appid']."/2");
+            if($data) {
+
+            }
+
+        }
     }
 ?>
 
