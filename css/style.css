@@ -202,6 +202,7 @@ header form #sign-in-btn
     background: #252C33;
     color: #fff;
     font-weight: 300;
+    clear: both;
 }
 
 #chatTxtInput {
@@ -218,7 +219,6 @@ header form #sign-in-btn
 
 #chatTxtInput:focus {
     outline: none;
-    height: 70px;
 }
 
 #chatBtn {
@@ -309,12 +309,18 @@ header form #sign-in-btn
     float: right;
     font-weight: 400;
     color: #999;
+    clear: both;
 }
 
 #chatLog .chatMsg p .chatName {
     font-weight: 700;
     display: block;
     padding-bottom: 10px;
+    clear: both;
+}
+
+.otherUser {
+    float: right;
 }
 
 #sidebar
