@@ -151,7 +151,8 @@ if(!isset($_SESSION['steamid'])) {
 
             userRef.child(steamID).child('chats').child(UserChatID).limitToLast(1).on('child_added', function(DataSnapshot) {
                         DataSnapshot = DataSnapshot.val();
-                        $('#chatlog').append("<ul><li class='chatImg'><img src='" + DataSnapshot.pictureUrl + "'></li><li class='chatMsg'><p><span class='chatMsg'>" + DataSnapshot.name + "<time>" + convertToDate(DataSnapshot.time) + "</time></span>" + DataSnapshot.message + "</p></span></li></ul>");
+
+                        $('#chatlog').append("<ul><li class='chatImg'><img src='" + DataSnapshot.pictureUrl + "'></li><li class='chatMsg'><p><span class='chatName'>" + DataSnapshot.name + "<time>" + convertToDate(DataSnapshot.time) + "</time></span>" + DataSnapshot.message + "</p></span></li></ul>");
                         $('#chatlog').scrollTop($('#chatlog')[0].scrollHeight);
                     })
             userRef.child(UserChatID).child('chats').child(steamID).limitToLast(1).on('child_added', function(DataSnapshot) {
