@@ -10,12 +10,21 @@ $(document).ready(function(){
         $("#achievement-list").empty();
         var steamID = $(this).attr('steamid');
         var appID = $(this).attr('appid');
-        $.get("steamauth/userInfo.php?appid=" + appID + "&steamid=" + steamID, function(data, status){
-        var playerAchievements = JSON.parse(data);
+        var achievementsData = "";
 
-            if(playerAchievements.playerstats.success) {
+        $.get("steamauth/userInfo.php?appid=" + appID, function(data, status){
+            achievementsData = JSON.parse(data);
+        });
+
+        $.get("steamauth/userInfo.php?appid=" + appID + "&steamid=" + steamID, function(data, status) {
+
+            if(playerAchievements.playerstats.success && playerAchievements.playerstats.achievements != undefined) {
                 for(var i = 0; i < playerAchievements.playerstats.achievements.length; i++) {
-                    $("#achievement-list").append("<p>Name: " + playerAchievements.playerstats.achievements[i].name + "</p><p>Description: " + playerAchievements.playerstats.achievements[i].description + "</p></p><p>Achieved: " + playerAchievements.playerstats.achievements[i].achieved + "</p>")
+                    if(playerAchievements.playerstats.achievements[i].achieved == 1) {
+                        $("#achievement-list").append("<p><img src='" + achievementsData.game.availableGameStats.achievements[i].icon + "'></p><p>Name: " + playerAchievements.playerstats.achievements[i].name + "</p><p>Description: " +       playerAchievements.playerstats.achievements[i].description + "</p></p><p>Achieved: " + playerAchievements.playerstats.achievements[i].achieved + "</p>");
+                    } else {
+                        $("#achievement-list").append("<p><img src='" + achievementsData.game.availableGameStats.achievements[i].icongray + "'></p><p>Name: " + playerAchievements.playerstats.achievements[i].name + "</p><p>Description: " +       playerAchievements.playerstats.achievements[i].description + "</p></p><p>Achieved: " + playerAchievements.playerstats.achievements[i].achieved + "</p>");
+                    }
                 }
             } else {
                 $("#achievement-list").append("<p>No achievements for this game :(</p>");
