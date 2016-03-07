@@ -83,5 +83,11 @@ function file_get_contents_curl($url) {
 
     }
 
+    if(isset($_GET['appid']) && !isset($_GET['steamid'])) {
+            $steamAchievementsContent = file_get_contents_curl("http://api.steampowered.com/ISteamUserStats/GetSchemaForGame/v2/?key=41AF33A7F00028D1E153D748597DEEF3&appid=".$_GET['appid']."");
+
+        echo $steamAchievementsContent;
+
+    }
 ?>
 
