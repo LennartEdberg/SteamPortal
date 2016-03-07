@@ -203,6 +203,7 @@ header form #sign-in-btn
     color: #fff;
     font-weight: 300;
     clear: both;
+    margin-right: 10px;
 }
 
 #chatTxtInput {
@@ -294,7 +295,7 @@ header form #sign-in-btn
 #chatLog .chatMsg p {
     background: #eef8ff;
     color: #34495E;
-    max-width: 90%;
+    max-width: 100%;
     min-width: 200px;
     border-radius: 5px;
     padding: 10px;
