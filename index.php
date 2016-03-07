@@ -117,8 +117,8 @@ if(!isset($_SESSION['steamid'])) {
                 userRef.child(UserChatID).child('chats').child(steamID).off('child_added');
             }
             $('#chatlog').empty();
-            $('#chatterID').val($(this).attr('value'));
-            UserChatID = $(this).attr('value');
+            $('#chatterID').val($(this).children(".chatLink").attr('value'));
+            UserChatID = $(this).children(".chatLink").attr('value');
 
             userRef.child(steamID).child('chats').once('value', function(snapshot) {
                 userRef.child(UserChatID).child('chats').once('value', function(snapshot2) {
@@ -193,10 +193,10 @@ if(!isset($_SESSION['steamid'])) {
         }
 
         
-        $('.chatLink').on('click', startChat);
+        $('.friendCell').on('click', startChat);
         $('#chatBtn').on('click', sendChatMsg);
 
-        $('.chatLink').on('click', function(){
+        $('.friendCell').on('click', function(){
             if(!$('#chat').is(":visible")) {
                 $('#chat').slideToggle();
             }
