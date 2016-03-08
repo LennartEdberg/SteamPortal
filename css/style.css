@@ -360,7 +360,7 @@ header form #sign-in-btn
     top: 50%;
     transform: translateY(-50%);
     float: right;
-    width: 30%;
+    width: 38%;
 }
 
 .menu-bar ul {
@@ -513,8 +513,3 @@ header form #sign-in-btn
 
 /* ACHIEVEMENTS */
 
-#achievement-list {
-    width: 100%;
-    height: auto;
-    padding-bottom: 200px;
-}
