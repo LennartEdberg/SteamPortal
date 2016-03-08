@@ -545,12 +545,13 @@ header form #sign-in-btn
     cursor: pointer;
 }
 
-#CSGO-list {
+#CSGO-list, #DOTA-list, #TF2-list {
     width: 100%;
+    text-align: center;
 }
 
 #item-list .item-wrap {
-    width: 10%;
+    width: 18%;
     display: inline-block;
     vertical-align: middle;
     position: relative;
@@ -563,10 +564,15 @@ header form #sign-in-btn
     border-radius: 7px;
     text-align: center;
     cursor: pointer;
+    background: rgba(27,35,42,1);
+    overflow: hidden;
 }
 
 #item-list .item-wrap:hover {
-    background: rgba(27,35,42,1);
+}
+
+#item-list .item-wrap:hover img{
+    opacity: 0.5;
 }
 
 #item-list .item-wrap img {
@@ -578,6 +584,17 @@ header form #sign-in-btn
     width: 100%;
     font-size: 13px;
     padding: 0 0 10px 0;
+    display: block;
+    position: relative;
+    color: #fff;
+    top: 50px;-webkit-transition: all 0.2s ease-in-out;
+    -moz-transition: all 0.2s ease-in-out;
+    -o-transition: all 0.2s ease-in-out;
+    transition: all 0.2s ease-in-out;
+}
+
+#item-list .item-wrap:hover p {
+    top:0 ;
 }
 /* ACHIEVEMENTS */
 

@@ -66,8 +66,10 @@ $(document).ready(function(){
         }
         
         if($('#item-list').is(":visible")) {
-            $('#game-list').show();
-            $('#item-list').slideUp();
+            $('#game-list').slideDown();
+            setTimeout(function(){
+              $('#item-list').hide();  
+            }, 200);
         }
     });
     
@@ -95,8 +97,15 @@ $(document).ready(function(){
             $('#item-list').show();
                 $('#game-list').slideUp();
             }
+        
+        if($('#friendlist').is(":visible")) {
+            $('#item-list').show();
+                $('#friendlist').slideUp();
+                $('#game-list').hide();
+            }
     });
     
+    // Filter för inventory items
     $('#CSGO-btn').on('click', function(){
         $('#CSGO-list').slideDown();
         $('#DOTA-list').hide();
