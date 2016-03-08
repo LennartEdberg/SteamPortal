@@ -213,7 +213,7 @@ header form #sign-in-btn
     background: rgba(27,35,42,0.9);
     border: none;
     color: #fff;
-    padding: 5px;
+    padding: 10px;
     font-family: 'Open Sans', sans-serif;
     font-weight: 600;
 }
@@ -267,7 +267,7 @@ header form #sign-in-btn
 #chatLog ul {
     display: block;
     position: relative;
-    max-width: 90%;
+    width: 90%;
     padding: 10px 0 10px 0;
     list-style: none;
     margin: 0;
@@ -281,11 +281,13 @@ header form #sign-in-btn
     border-radius: 5px;
     margin-top: 4px;
     display: inline-block;
+    position: relative;
 }
 
 #chatLog li {
     display: inline-block;
     vertical-align: middle;
+    position: relative;
 }
 
 #chatLog .chatMsg {
@@ -295,7 +297,7 @@ header form #sign-in-btn
 #chatLog .chatMsg p {
     background: #eef8ff;
     color: #34495E;
-    max-width: 100%;
+    width: 100%;
     min-width: 200px;
     border-radius: 5px;
     padding: 10px;
