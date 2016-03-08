@@ -17,7 +17,7 @@ $(document).ready(function(){
         });
 
         $.get("steamauth/userInfo.php?appid=" + appID + "&steamid=" + steamID, function(data, status) {
-
+            var playerAchievements = JSON.parse(data);
             if(playerAchievements.playerstats.success && playerAchievements.playerstats.achievements != undefined) {
                 for(var i = 0; i < playerAchievements.playerstats.achievements.length; i++) {
                     if(playerAchievements.playerstats.achievements[i].achieved == 1) {
