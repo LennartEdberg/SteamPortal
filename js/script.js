@@ -114,9 +114,9 @@ $(document).ready(function(){
     })
     
     $('#Show-all-items').on('click', function(){
-        $('#TF-list').show();
-        $('#DOTA-list').show();
-        $('#CSGO-list').show();
+        $('#TF-list').slideDown();
+        $('#DOTA-list').slideDown();
+        $('#CSGO-list').slideDown();
     })
     
 });
