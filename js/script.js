@@ -40,15 +40,15 @@ $(document).ready(function(){
             var ItemsObj = JSON.parse(data);
             for(var key in ItemsObj.CSGO)
                 {
-                    $("#CSGO-list").append("<img src='http://cdn.steamcommunity.com/economy/image/" + ItemsObj.CSGO[key].icon_url + "'><p>Name: " + ItemsObj.CSGO[key].name + "</p>");
+                    $("#CSGO-list").append("<div class='item-wrap'><img src='http://cdn.steamcommunity.com/economy/image/" + ItemsObj.CSGO[key].icon_url + "'><p>" + ItemsObj.CSGO[key].name + "</p></div>");
                 }
             for(var key in ItemsObj.Dota2)
                 {
-                    $("#DOTA-list").append("<img src='http://cdn.steamcommunity.com/economy/image/" + ItemsObj.Dota2[key].icon_url + "'><p>Name: " + ItemsObj.Dota2[key].name + "</p>");
+                    $("#DOTA-list").append("<div class='item-wrap'><img src='http://cdn.steamcommunity.com/economy/image/" + ItemsObj.Dota2[key].icon_url + "'><p>" + ItemsObj.Dota2[key].name + "</p></div>");
                 }
             for(var key in ItemsObj.TF2)
                 {
-                    $("#TF2-list").append("<img src='http://cdn.steamcommunity.com/economy/image/" + ItemsObj.TF2[key].icon_url + "'><p>Name: " + ItemsObj.TF2[key].name + "</p>");
+                    $("#TF2-list").append("<div class='item-wrap'><img src='http://cdn.steamcommunity.com/economy/image/" + ItemsObj.TF2[key].icon_url + "'><p>" + ItemsObj.TF2[key].name + "</p></div>");
                 }
         });
 
@@ -56,9 +56,16 @@ $(document).ready(function(){
 //Hämta alla items -> http://steamcommunity.com/profiles/76561197995308584/inventory/json/730/2
     
     $('.gamesBtn').on('click', function(){
-        console.log(123);
-       $('#game-list').show();
-       $('#friendlist').slideUp();
+       
+        if($('#friendlist').is(":visible")){
+            $('#game-list').show();
+            $('#friendlist').slideUp();
+        }
+        
+        if($('#achievement-list').is(":visible")) {
+            $('#game-list').show();
+            $('#achievement-list').slideUp();
+        }
     });
     
     $('.friendsBtn').on('click', function(){
@@ -66,11 +73,22 @@ $(document).ready(function(){
             setTimeout(function(){
               $('#game-list').hide();  
             }, 200);
+        $('#achievement-list').slideUp();
     });
     
     $('.dashboardBtn').on('click', function(){
         $('#friendlist').slideDown();
         $('#game-list').show();
+        $('#achievement-list').slideUp();
+    });
+    
+    $('#achievement-list').hide();
+    $('.itemss').on('click', function(){
+            
+        if($('#game-list').is(":visible")) {
+            $('#achievement-list').show();
+                $('#game-list').slideUp();
+            }
     });
     
 });

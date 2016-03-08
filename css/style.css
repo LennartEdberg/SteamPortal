@@ -425,6 +425,7 @@ header form #sign-in-btn
     top: 80px;
     margin: 0 auto;
     clear: both;
+    padding: 0 0 80px;
 }
 
 #game-list #gameListHeader {
@@ -511,5 +512,72 @@ header form #sign-in-btn
     right: 0;
 }
 
+/* INVENTORY */
+
+#achievement-list {
+    width: 95%;
+    margin: 0 auto;
+    padding-top: 93px;
+}
+
+#achievement-list #filterMenu {
+    text-align: center;
+    background: rgba(27,35,42,1);
+    height: 100px;
+    line-height: 100px;
+    color: #fff;
+    border-radius: 8px;
+    margin: 0 0 30px 0;
+}
+
+#achievement-list #filterMenu li {
+    display: inline;
+    margin: 40px;
+    color: #fff;
+    -webkit-transition: all 0.2s ease-in-out;
+    -moz-transition: all 0.2s ease-in-out;
+    -o-transition: all 0.2s ease-in-out;
+    transition: all 0.2s ease-in-out;
+}
+
+#achievement-list #filterMenu li:hover {
+    color: #252C33;
+    cursor: pointer;
+}
+
+#CSGO-list {
+    width: 100%;
+}
+
+#achievement-list .item-wrap {
+    width: 10%;
+    display: inline-block;
+    vertical-align: middle;
+    position: relative;
+    padding: 5px;
+    margin: 3px;
+    -webkit-transition: all 0.2s ease-in-out;
+    -moz-transition: all 0.2s ease-in-out;
+    -o-transition: all 0.2s ease-in-out;
+    transition: all 0.2s ease-in-out;
+    border-radius: 7px;
+    text-align: center;
+    cursor: pointer;
+}
+
+#achievement-list .item-wrap:hover {
+    background: rgba(27,35,42,1);
+}
+
+#achievement-list .item-wrap img {
+    max-width: 50%;
+    padding: 10px 0 10px 0;
+}
+
+#achievement-list .item-wrap p {
+    width: 100%;
+    font-size: 13px;
+    padding: 0 0 10px 0;
+}
 /* ACHIEVEMENTS */
 

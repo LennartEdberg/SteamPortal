@@ -68,7 +68,7 @@ if(!isset($_SESSION['steamid'])) {
     $content .= '<ul>';
     $content .= '<li class="dashboardBtn">Dashboard</li>';
     $content .= '<li class="gamesBtn">Games</li>';
-    $content .= '<li id="itemClick" steamID="'.$steamprofile['steamid'].'" class="inventoryBtn">Inventory</li>';
+    $content .= '<li id="itemClick" class="itemss" steamID="'.$steamprofile['steamid'].'" class="inventoryBtn">Inventory</li>';
     $content .= '<li class="friendsBtn">Friends</li>';
     $content .= '<li>';
     $content .= "<form action=\"steamauth/logout.php\" method=\"post\"><input value=\"Log out\" type=\"submit\" /></form>";
@@ -265,19 +265,23 @@ if(!isset($_SESSION['steamid'])) {
             $content .= '</div>';
         }
     }
+    $content .= '</div>';
     $content .= '<div id="achievement-list">';
+    $content .= '<ul id="filterMenu">';
+    $content .= '<li id="CSGO-btn">Counter-Strike: Global Offensive</li>';
+    $content .= '<li id="Dota-btn">Dota 2</li>';
+    $content .= '<li id="TF-btn">Team Fortress 2</li>';
+    $content .= '</ul>';
     $content .= '<div id="CSGO-list">';
-    $content .= '<h2>Counter-Strike Global:Offensive</h2>';
     $content .= '</div>';
     $content .= '<div id="DOTA-list">';
-    $content .= '<h2>Dota 2</h2>';
     $content .= '</div>';
     $content .= '<div id="TF2-list">';
-    $content .= '<h2>Teamfortress 2</h2>';
     $content .= '</div>';
     $content .= '</div>';
     $content .= '<div id="item-list">';
-    $content .= '</div>';
+    
+    
     echo $content;
 }
 ?>
