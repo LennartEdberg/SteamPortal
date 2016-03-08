@@ -216,7 +216,6 @@ if(!isset($_SESSION['steamid'])) {
 
         $('.friendCell').on('click', startChat);
         $('#chatBtn').on('click', sendChatMsg);
-        $('#chatBtn').on('click', sendChatMsg);
         $('#chatTxtInput').on( "keydown", function(event) {
             if(event.which == 13) {
                 sendChatMsg();
