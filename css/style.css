@@ -443,6 +443,7 @@ header form #sign-in-btn
     -o-transition: all 0.3s ease-in-out;
     transition: all 0.3s ease-in-out;
     margin: 3px;
+    position: relative;
 }
 
 .gameCell img {
@@ -455,15 +456,65 @@ header form #sign-in-btn
     transition: all 0.3s ease-in-out;
     cursor: pointer;
     position: relative;
+    display: block;
     opacity: 1;
 }
 
 .gameCell img:hover {
-    opacity: 0.5;
+    opacity: 0.2;
     -webkit-transform: scale(1.05);
 	transform: scale(1.05);
 }
 
 .gameCell .game-info {
-    display: none;
+    display: block;
+    color: #fff;
+    z-index: 222;
+    color: #fff;
+	font-size: 15px;
+    font-weight: 500;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    overflow: hidden;
+    z-index: 1000;
+	white-space: nowrap;
+    height: 50px;
+    width: 100%;
+    -webkit-backface-visibility: hidden;
+	backface-visibility: hidden;
+    pointer-events: none;
+    letter-spacing: 1px;
+}
+
+.gameCell .game-info p {
+    position: relative;
+    right: 100%;
+    -webkit-transition: all 0.2s ease-in-out;
+    -moz-transition: all 0.2s ease-in-out;
+    -o-transition: all 0.2s ease-in-out;
+    transition: all 0.2s ease-in-out;
+}
+.gameCell .game-info span {
+    position: relative;
+    right: 100%;
+    -webkit-transition: all 0.3s ease-in-out;
+    -moz-transition: all 0.3s ease-in-out;
+    -o-transition: all 0.3s ease-in-out;
+    transition: all 0.3s ease-in-out;
+}
+
+.gameCell:hover .game-info p {
+    right: 0;
+}
+.gameCell:hover .game-info span {
+    right: 0;
+}
+
+/* ACHIEVEMENTS */
+
+#achievement-list {
+    width: 100%;
+    height: auto;
+    padding-bottom: 200px;
 }
