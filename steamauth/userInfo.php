@@ -105,15 +105,24 @@ function file_get_contents_curl($url) {
     }
 
     if(isset($_GET['items']) && isset($_GET['steamid'])) {
-        $gamesUrl = file_get_contents_curl("http://api.steampowered.com/IPlayerService/GetOwnedGames/v0001/?key=41AF33A7F00028D1E153D748597DEEF3&steamid=".$_GET['steamid']."&include_appinfo=1&include_played_free_games=1&format=json");
-        $games = json_decode($gamesUrl, true);
-        foreach($games['response']['games'] as $game=>$key) {
-            $data = file_get_contents_curl("http://steamcommunity.com/profiles/".$_GET['steamid']."/inventory/json/".$game['appid']."/2");
-            if($data) {
 
-            }
-
+        $itemsArray = array('CSGO' => '', 'Dota2' => '', 'TF2' => '');
+        $CSGOItemsUrl = file_get_contents_curl("http://steamcommunity.com/profiles/".$_GET['steamid']."/inventory/json/730/2");
+        $DOTAItemsUrl = file_get_contents_curl("http://steamcommunity.com/profiles/".$_GET['steamid']."/inventory/json/570/2");
+        $TF2ItemsUrl = file_get_contents_curl("http://steamcommunity.com/profiles/".$_GET['steamid']."/inventory/json/440/2");
+        $CSGOItems = json_decode($CSGOItemsUrl, true);
+        $DotaItems = json_decode($DOTAItemsUrl, true);
+        $TF2Items = json_decode($TF2ItemsUrl, true);
+        foreach($CSGOItems['rgDescriptions'] as $key=>$value) {
+            $itemsArray['CSGO'][$key] = $value;
         }
+        foreach($DotaItems['rgDescriptions'] as $key=>$value) {
+            $itemsArray['Dota2'][$key] = $value;
+        }
+        foreach($TF2Items['rgDescriptions'] as $key=>$value) {
+            $itemsArray['TF2'][$key] = $value;
+        }
+        echo json_encode($itemsArray);
     }
 ?>
 

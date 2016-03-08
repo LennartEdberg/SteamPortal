@@ -68,6 +68,7 @@ if(!isset($_SESSION['steamid'])) {
     $content .= '<ul>';
     $content .= '<li class="dashboardBtn">Dashboard</li>';
     $content .= '<li class="gamesBtn">Games</li>';
+    $content .= '<li id="itemClick" steamID="'.$steamprofile['steamid'].'" class="inventoryBtn">Inventory</li>';
     $content .= '<li class="friendsBtn">Friends</li>';
     $content .= '<li>';
     $content .= "<form action=\"steamauth/logout.php\" method=\"post\"><input value=\"Log out\" type=\"submit\" /></form>";
@@ -266,7 +267,6 @@ if(!isset($_SESSION['steamid'])) {
     $content .= '<div id="achievement-list">';
     $content .= '</div>';
     $content .= '<div id="item-list">';
-    $content .= '<p id="itemClick" steamID="'.$steamprofile['steamid'].'">Click me for ITEMZ</p>';
     $content .= '</div>';
     echo $content;
 }
