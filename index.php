@@ -259,6 +259,7 @@ if(!isset($_SESSION['steamid'])) {
             $content .= '<img src="https://steamcdn-a.akamaihd.net/steam/apps/'.$game['appid'].'/header.jpg" alt="'.$game['name'].'" style="min-width: 460px;">';
             $content .= '<div class="game-info">';
             $content .= '<p>Hours played: '.$game['playtime_forever'].'</p>';
+            $content .= '<span>View achievements</span>';
             $content .= '</div>';
             $content .= '</div>';
         }
