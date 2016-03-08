@@ -91,4 +91,20 @@ $(document).ready(function(){
             }
     });
     
+    $('#CSGO-btn').on('click', function(){
+        $('#CSGO-list').slideDown();
+        $('#DOTA-list').hide();
+        $('#TF2-list').hide();
+    })
+    $('#Dota-btn').on('click', function(){
+        $('#DOTA-list').slideDown();
+        $('#CSGO-list').hide();
+        $('#TF2-list').hide();
+    })
+    $('#TF-btn').on('click', function(){
+        $('#TF-list').slideDown();
+        $('#DOTA-list').hide();
+        $('#CSGO-list').hide();
+    })
+    
 });
