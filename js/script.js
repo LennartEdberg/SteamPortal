@@ -33,7 +33,7 @@ $(document).ready(function(){
     });
 
     $("#itemClick").on('click', function() {
-        $("#item-list").empty();
+        
         var steamID = $(this).attr('steamid');
 
         $.get("steamauth/userInfo.php?items=1&steamid=" + steamID, function(data, status){
@@ -62,9 +62,9 @@ $(document).ready(function(){
             $('#friendlist').slideUp();
         }
         
-        if($('#achievement-list').is(":visible")) {
+        if($('#item-list').is(":visible")) {
             $('#game-list').show();
-            $('#achievement-list').slideUp();
+            $('#item-list').slideUp();
         }
     });
     
@@ -73,20 +73,20 @@ $(document).ready(function(){
             setTimeout(function(){
               $('#game-list').hide();  
             }, 200);
-        $('#achievement-list').slideUp();
+        $('#item-list').slideUp();
     });
     
     $('.dashboardBtn').on('click', function(){
         $('#friendlist').slideDown();
         $('#game-list').show();
-        $('#achievement-list').slideUp();
+        $('#item-list').slideUp();
     });
     
-    $('#achievement-list').hide();
+    $('#item-list').hide();
     $('.itemss').on('click', function(){
             
         if($('#game-list').is(":visible")) {
-            $('#achievement-list').show();
+            $('#item-list').show();
                 $('#game-list').slideUp();
             }
     });

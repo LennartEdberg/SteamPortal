@@ -267,6 +267,8 @@ if(!isset($_SESSION['steamid'])) {
     }
     $content .= '</div>';
     $content .= '<div id="achievement-list">';
+    $content .= '</div>';
+    $content .= '<div id="item-list">';
     $content .= '<ul id="filterMenu">';
     $content .= '<li id="CSGO-btn">Counter-Strike: Global Offensive</li>';
     $content .= '<li id="Dota-btn">Dota 2</li>';
@@ -279,9 +281,7 @@ if(!isset($_SESSION['steamid'])) {
     $content .= '<div id="TF2-list">';
     $content .= '</div>';
     $content .= '</div>';
-    $content .= '<div id="item-list">';
-    
-    
+
     echo $content;
 }
 ?>
