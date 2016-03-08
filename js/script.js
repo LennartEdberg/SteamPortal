@@ -33,11 +33,14 @@ $(document).ready(function(){
     });
 
     $("#itemClick").on('click', function() {
-        
+       $('#CSGO-list').empty();
+       $('#DOTA-list').empty();
+       $('#TF2-list').empty();
         var steamID = $(this).attr('steamid');
 
         $.get("steamauth/userInfo.php?items=1&steamid=" + steamID, function(data, status){
             var ItemsObj = JSON.parse(data);
+            
             for(var key in ItemsObj.CSGO)
                 {
                     $("#CSGO-list").append("<div class='item-wrap'><img src='http://cdn.steamcommunity.com/economy/image/" + ItemsObj.CSGO[key].icon_url + "'><p>" + ItemsObj.CSGO[key].name + "</p></div>");
@@ -74,6 +77,9 @@ $(document).ready(function(){
               $('#game-list').hide();  
             }, 200);
         $('#item-list').slideUp();
+        
+        
+        
     });
     
     $('.dashboardBtn').on('click', function(){
@@ -105,6 +111,12 @@ $(document).ready(function(){
         $('#TF-list').slideDown();
         $('#DOTA-list').hide();
         $('#CSGO-list').hide();
+    })
+    
+    $('#Show-all-items').on('click', function(){
+        $('#TF-list').show();
+        $('#DOTA-list').show();
+        $('#CSGO-list').show();
     })
     
 });

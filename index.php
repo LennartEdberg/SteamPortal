@@ -270,6 +270,7 @@ if(!isset($_SESSION['steamid'])) {
     $content .= '</div>';
     $content .= '<div id="item-list">';
     $content .= '<ul id="filterMenu">';
+    $content .= '<li id="Show-all-items">Show All</li>';
     $content .= '<li id="CSGO-btn">Counter-Strike: Global Offensive</li>';
     $content .= '<li id="Dota-btn">Dota 2</li>';
     $content .= '<li id="TF-btn">Team Fortress 2</li>';
