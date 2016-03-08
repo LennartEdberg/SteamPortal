@@ -40,17 +40,16 @@ $(document).ready(function(){
             var ItemsObj = JSON.parse(data);
             for(var key in ItemsObj.CSGO)
                 {
-                    $("#item-list").append("<img src='http://cdn.steamcommunity.com/economy/image/" + ItemsObj.CSGO[key].icon_url + "'><p>Name: " + ItemsObj.CSGO[key].name + "</p>");
+                    $("#CSGO-list").append("<img src='http://cdn.steamcommunity.com/economy/image/" + ItemsObj.CSGO[key].icon_url + "'><p>Name: " + ItemsObj.CSGO[key].name + "</p>");
                 }
             for(var key in ItemsObj.Dota2)
                 {
-                    $("#item-list").append("<img src='http://cdn.steamcommunity.com/economy/image/" + ItemsObj.Dota2[key].icon_url + "'><p>Name: " + ItemsObj.Dota2[key].name + "</p>");
+                    $("#DOTA-list").append("<img src='http://cdn.steamcommunity.com/economy/image/" + ItemsObj.Dota2[key].icon_url + "'><p>Name: " + ItemsObj.Dota2[key].name + "</p>");
                 }
             for(var key in ItemsObj.TF2)
                 {
-                    $("#item-list").append("<img src='http://cdn.steamcommunity.com/economy/image/" + ItemsObj.TF2[key].icon_url + "'><p>Name: " + ItemsObj.TF2[key].name + "</p>");
+                    $("#TF2-list").append("<img src='http://cdn.steamcommunity.com/economy/image/" + ItemsObj.TF2[key].icon_url + "'><p>Name: " + ItemsObj.TF2[key].name + "</p>");
                 }
-
         });
 
     });
