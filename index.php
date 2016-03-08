@@ -109,6 +109,15 @@ if(!isset($_SESSION['steamid'])) {
             name: steamname,
             pictureURL: steamPicturUrl
         });
+        $(".chatLink").each(function(){
+            var friendname = $(this).siblings('span.friendName').html();
+            var friendpictureurl = $(this).siblings('span.friendProfileImg').children().attr('src');
+            var friendid = $(this).attr('value');
+            userRef.child(friendid).update({
+                name: friendname,
+                pictureURL: friendpictureurl
+            });
+        });
 
         function startChat() {
 
@@ -236,7 +245,7 @@ if(!isset($_SESSION['steamid'])) {
         $content .= '<div class="friend-container">';
     foreach($steamprofile['friendlist'] as $key=>$friend) {
         $content .= '<div class="friendCell">';
-        $content .= '<span><img style="width: 40px; border-radius: 5px; vertical-align: middle;" src="' . $friendListArray[$key]['avatarfull'] . '"></span><span class="friendName">' . $friendListArray[$key]['personaname'] . '</span>';
+        $content .= '<span class="friendProfileImg"><img style="width: 40px; border-radius: 5px; vertical-align: middle;" src="' . $friendListArray[$key]['avatarfull'] . '"></span><span class="friendName">' . $friendListArray[$key]['personaname'] . '</span>';
         $content .= '<p class="chatLink" value="'.$friendListArray[$key]['steamid'].'">Chat</p>';
         $content .= '</div>';
 
