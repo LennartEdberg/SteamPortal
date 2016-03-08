@@ -572,7 +572,7 @@ header form #sign-in-btn
 }
 
 #item-list .item-wrap:hover img{
-    opacity: 0.5;
+    opacity: 0.3;
 }
 
 #item-list .item-wrap img {
@@ -582,19 +582,20 @@ header form #sign-in-btn
 
 #item-list .item-wrap p {
     width: 100%;
-    font-size: 13px;
+    font-size: 16px;
     padding: 0 0 10px 0;
     display: block;
-    position: relative;
+    position: absolute;
     color: #fff;
-    top: 50px;-webkit-transition: all 0.2s ease-in-out;
+    top: 100%;
+    -webkit-transition: all 0.2s ease-in-out;
     -moz-transition: all 0.2s ease-in-out;
     -o-transition: all 0.2s ease-in-out;
     transition: all 0.2s ease-in-out;
 }
 
 #item-list .item-wrap:hover p {
-    top:0 ;
+    top: 50%;
 }
 /* ACHIEVEMENTS */
 
