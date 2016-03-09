@@ -22,17 +22,8 @@ if(!isset($_SESSION['steamid'])) {
     steamlogin(); //login button
 
     $content .= '<section id="intro-container">';
-    $content .= '<h1 class="intro-headerText">The ultimate way to interact with your friends on steam</h1>';
-    $content .= '<a href="#friends-container"><button>HOW IT WORKS</button></a>';
-    $content .= '</section>';
-
-    $content .= '<section id="intro-friend">';
-    $content .= '<div class="intro-friend-text">';
-    $content .= '<h2>Easy to communicate with your friends in a private chat and group chats</h2>';
-    $content .= '</div>';
-    $content .= '<figure class="intro-friend-img">';
-    $content .= '<img src="img/friendsList.png">';
-    $content .= '</figure>';
+    $content .= '<h1 class="intro-headerText">The ultimate way to interact with your friends</h1>';
+    $content .= '<a href="https://store.steampowered.com/join/"><button>No account? Register here</button></a>';
     $content .= '</section>';
     $content .= '</header>';
     echo $content;

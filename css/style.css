@@ -24,7 +24,7 @@ a {
 header {
     width: 100%;
     height: 70px;
-    background: #1e1e1e;
+    background: rgba(27,35,42,0.9);
 }
 
 header form {
@@ -64,34 +64,40 @@ header form #sign-in-btn
 }
 
 #intro-container {
-    width: 60%;
+   width: 60%;
     height: 400px;
+    position: relative;
     margin: 0 auto;
     text-align: center;
-    padding-top: 140px;
-    font-family: 'Open Sans', sans-serif;
+    /* padding-top: 140px; */
+    top: -50%;
+    transform: translateY(50%);
+    font-family: 'Open Sans',sans-serif;
 }
 
 #intro-container .intro-headerText {
     font-size: 80px;
-    font-weight: 500;
+    font-weight: 600;
     color: #fafafa;
 }
 
 #intro-container button {
-    width: 600px;
+    width: 550px;
     height: 70px;
     margin-top: 60px;
-    background: #188dce;
+    background: rgba(27,35,42,0.9);
     border: none;
     border-radius: 35px;
     color: #fafafa;
     font-weight: 600;
     letter-spacing: 2px;
-    -webkit-transition: all 0.4s ease-in-out;
-    -moz-transition: all 0.4s ease-in-out;
-    -o-transition: all 0.4s ease-in-out;
-    transition: all 0.4s ease-in-out;
+    -webkit-transition: all 0.3s ease-in-out;
+    -moz-transition: all 0.3s ease-in-out;
+    -o-transition: all 0.3s ease-in-out;
+    transition: all 0.3s ease-in-out;
+    font-family: 'Open Sans',sans-serif;
+    font-size: 16px;
+    cursor: pointer;
 }
 
 #intro-container button:focus {
@@ -99,36 +105,35 @@ header form #sign-in-btn
 }
 
 #intro-container button:hover {
-    background: #206389;
+    width: 650px;
 }
 
-.intro-friend {
+#intro-friend {
     position: relative;
-    overflow-y: scroll;
-    max-height: 600px;
-    width: 400px;
-    background: rgba(27,35,42,0.9);
-    float: left;
     display: block;
+    padding-top: 80px;
 }
 
 .intro-friend-text {
-    width: 45%;
-    display: inline-block;
-    font-size: 40px;
-    vertical-align:top;
-    position: relative;
-    color: #fafafa;
+    width: 100%;
+    text-align: center;
     font-weight: 400;
-    top: 40%;
-    transform: translateY(-40%);
+    color: #fafafa;
+    font-family: 'Open Sans', sans-serif;
+}
+
+.intro-friend-text h2{
+    font-size: 60px;
+    font-weight: 500;
+    color: #fff;
 }
 
 .intro-friend-img {
-    width: 40%;
-    display: inline-block;
-    vertical-align:top;
-    margin-top: 60px;
+    width: 75%;
+    margin: 0 auto;
+}
+.intro-friend-img img {
+    max-width: 100%;
 }
 
 
@@ -674,6 +679,18 @@ box-shadow:         0px 0px 11px -1px rgba(0, 0, 0, 0.6);
 }
 
 /* MEDIA QUERIES */
+
+@media screen and (max-width: 1120px) {
+    #intro-container .intro-headerText {
+        font-size: 47px;
+    }
+}
+
+@media screen and (max-width: 1150px) {
+    #intro-container {
+            width: 70%;
+    }
+}
 
 @media screen and (max-width: 1540px) {
     #chat {
