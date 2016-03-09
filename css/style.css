@@ -60,6 +60,7 @@ header form #sign-in-btn
 {
     border-radius: 10px;
     width: 60px;
+    float: left;
 }
 
 #intro-container {
@@ -101,16 +102,17 @@ header form #sign-in-btn
     background: #206389;
 }
 
-.friend-container {
+.intro-friend {
     position: relative;
     overflow-y: scroll;
     max-height: 600px;
     width: 400px;
     background: rgba(27,35,42,0.9);
     float: left;
+    display: block;
 }
 
-.friends-text {
+.intro-friend-text {
     width: 45%;
     display: inline-block;
     font-size: 40px;
@@ -122,7 +124,7 @@ header form #sign-in-btn
     transform: translateY(-40%);
 }
 
-.friends-img {
+.intro-friend-img {
     width: 40%;
     display: inline-block;
     vertical-align:top;
@@ -155,11 +157,21 @@ header form #sign-in-btn
     left: 0.5%;
 }
 
+.friend-container {
+    position: relative;
+    overflow-y: scroll;
+    max-height: 600px;
+    width: 20%;
+    background: rgba(27,35,42,0.9);
+    float: left;
+}
+
 .friendCell
 {
     width: 90%;
     background: rgba(27,35,42,0.9);
     height: auto;
+    max-height: 60px;
     margin-top: 10px;
     margin-bottom: 10px;
     margin-right: 10px;
@@ -184,7 +196,7 @@ header form #sign-in-btn
 .friendName
 {
     color: #05a06a;
-    font-size: 16px;
+    font-size: 14px;
     margin-left: 20px;
 }
 
@@ -260,7 +272,7 @@ header form #sign-in-btn
 }
 
 .friendCell:hover .chatLink {
-    color: #05a06a;
+    color: #fff;
     right: 10px;
 }
 
@@ -342,11 +354,12 @@ header form #sign-in-btn
     color: #fff;
     top: 50%;
     transform: translateY(-50%);
+    width: 18%;
 }
 
 .profile-pic-wrap h2 {
     display: inline-block;
-    float: right;
+    float: left;
     position: relative;
     top: -50%;
     left: 10px;
@@ -360,7 +373,8 @@ header form #sign-in-btn
     top: 50%;
     transform: translateY(-50%);
     float: right;
-    width: 38%;
+    width: 80%;
+    text-align: right;
 }
 
 .menu-bar ul {
@@ -517,7 +531,6 @@ header form #sign-in-btn
 #item-list {
     width: 95%;
     margin: 0 auto;
-    padding-top: 93px;
 }
 
 #item-list #filterMenu {
@@ -607,3 +620,84 @@ box-shadow:         0px 0px 11px -1px rgba(0, 0, 0, 0.6);
 }
 /* ACHIEVEMENTS */
 
+#achievement-list {
+    width: 95%;
+    height: auto;
+    margin: 0 auto;
+    padding-top: 100px;
+    text-align: center;
+}
+
+#achievement-list .achieve-wrap {
+    width: 18%;
+    min-width: 330px;
+    min-height: 74px;
+    padding: 7px;
+    border-radius: 8px;
+    text-align: left;
+    display: inline-block;
+    color: #fff;
+    vertical-align: middle;
+    margin: 5px 5px 5px 5px;
+    background: rgba(27,35,42,0.9);
+    -webkit-transition: all 0.2s ease-in-out;
+    -moz-transition: all 0.2s ease-in-out;
+    -o-transition: all 0.2s ease-in-out;
+    transition: all 0.2s ease-in-out;
+    cursor: pointer;
+}
+#achievement-list .achieve-wrap:hover {
+   -webkit-transform: scale(1.06);
+	transform: scale(1.06);
+}
+
+.achieve-wrap img {
+    padding-bottom: 10px;
+    float: left;
+    padding-right: 10px;
+    margin-top: 10px;
+}
+
+.achieve-wrap .achieve-info {
+    font-size: 12px;
+    margin-top: 10px;
+}
+
+.achieve-wrap .achieve-info p{
+    font-size: 12px;
+    font-family: 'Open Sans';
+}
+
+.achieve-wrap .achieve-info .achieve-name{
+    font-size: 16px;
+    font-family: 'Montserrat', sans-serif;
+}
+
+/* MEDIA QUERIES */
+
+@media screen and (max-width: 1540px) {
+    #chat {
+        width: 72%;
+    }
+    .friend-container {
+        width: 25%;
+    }
+}
+
+@media screen and (max-width: 1240px) {
+    #chat {
+        width: 69%;
+    }
+    .friend-container {
+        width: 29%;
+    }
+}
+
+@media screen and (max-width: 1070px) {
+    #chat {
+        width: 64%;
+    }
+    .friend-container {
+        width: 33%;
+    }
+}

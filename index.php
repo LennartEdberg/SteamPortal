@@ -26,11 +26,11 @@ if(!isset($_SESSION['steamid'])) {
     $content .= '<a href="#friends-container"><button>HOW IT WORKS</button></a>';
     $content .= '</section>';
 
-    $content .= '<section id="friends-container">';
-    $content .= '<div class="friends-text">';
+    $content .= '<section id="intro-friend">';
+    $content .= '<div class="intro-friend-text">';
     $content .= '<h2>Easy to communicate with your friends in a private chat and group chats</h2>';
     $content .= '</div>';
-    $content .= '<figure class="friends-img">';
+    $content .= '<figure class="intro-friend-img">';
     $content .= '<img src="img/friendsList.png">';
     $content .= '</figure>';
     $content .= '</section>';
@@ -254,6 +254,7 @@ if(!isset($_SESSION['steamid'])) {
     $content .= '<h2 id="gameListHeader">Your Games</h2>';
     foreach($steamprofile['games'] as $key=>$game) {
         if($game['img_logo_url'] && $game['has_community_visible_stats'] >= 0) {
+            $content .= '<a href="#achievement-list">';
             $content .= '<div class="gameCell viewAchievements" steamID="'.$steamprofile['steamid'].'" appid="'.$game['appid'].'">';
             $content .= '<img src="https://steamcdn-a.akamaihd.net/steam/apps/'.$game['appid'].'/header.jpg" alt="'.$game['name'].'" style="min-width: 460px;">';
             $content .= '<div class="game-info">';
@@ -262,6 +263,7 @@ if(!isset($_SESSION['steamid'])) {
             $content .= '<span>View achievements</span>';
             $content .= '</div>';
             $content .= '</div>';
+            $content .= '</a>';
         }
     }
     $content .= '</div>';

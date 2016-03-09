@@ -1,5 +1,6 @@
 $(document).ready(function(){
     $('a').click(function() {
+        
         $('html, body').animate({
             scrollTop: $($.attr(this, 'href')).offset().top - 20
         }, 900);
@@ -21,9 +22,9 @@ $(document).ready(function(){
             if(playerAchievements.playerstats.success && playerAchievements.playerstats.achievements != undefined) {
                 for(var i = 0; i < playerAchievements.playerstats.achievements.length; i++) {
                     if(playerAchievements.playerstats.achievements[i].achieved == 1) {
-                        $("#achievement-list").append("<p><img src='" + achievementsData.game.availableGameStats.achievements[i].icon + "'></p><p>Name: " + playerAchievements.playerstats.achievements[i].name + "</p><p>Description: " +       playerAchievements.playerstats.achievements[i].description + "</p></p><p>Achieved: " + playerAchievements.playerstats.achievements[i].achieved + "</p>");
+                        $("#achievement-list").append("<div class='achieve-wrap' id='completed'><h2></h2><img src='" + achievementsData.game.availableGameStats.achievements[i].icon + "'><div class='achieve-info'><p class='achieve-name'>" + playerAchievements.playerstats.achievements[i].name + "</p><p>Description: " +       playerAchievements.playerstats.achievements[i].description + "</p></p><p>Achieved: " + playerAchievements.playerstats.achievements[i].achieved + "</p></div></div></div>");
                     } else {
-                        $("#achievement-list").append("<p><img src='" + achievementsData.game.availableGameStats.achievements[i].icongray + "'></p><p>Name: " + playerAchievements.playerstats.achievements[i].name + "</p><p>Description: " +       playerAchievements.playerstats.achievements[i].description + "</p></p><p>Achieved: " + playerAchievements.playerstats.achievements[i].achieved + "</p>");
+                        $("#achievement-list").append("<div class='achieve-wrap' id='unCompleted' style='opacity: 0.3;'><img src='" + achievementsData.game.availableGameStats.achievements[i].icongray + "'><div class='achieve-info'><p>" + playerAchievements.playerstats.achievements[i].name + "</p><p>Description: " +       playerAchievements.playerstats.achievements[i].description + "</p></p><p>Achieved: " + playerAchievements.playerstats.achievements[i].achieved + "</p></div></div>");
                     }
                 }
             } else {
@@ -59,7 +60,7 @@ $(document).ready(function(){
 //Hämta alla items -> http://steamcommunity.com/profiles/76561197995308584/inventory/json/730/2
     
     $('.gamesBtn').on('click', function(){
-       
+       $("#achievement-list").empty();
         if($('#friendlist').is(":visible")){
             $('#game-list').show();
             $('#friendlist').slideUp();
@@ -74,6 +75,7 @@ $(document).ready(function(){
     });
     
     $('.friendsBtn').on('click', function(){
+        $("#achievement-list").empty();
         $('#friendlist').slideDown();
             setTimeout(function(){
               $('#game-list').hide();  
@@ -85,6 +87,7 @@ $(document).ready(function(){
     });
     
     $('.dashboardBtn').on('click', function(){
+        $("#achievement-list").empty();
         $('#friendlist').slideDown();
         $('#game-list').show();
         $('#item-list').slideUp();
@@ -92,7 +95,7 @@ $(document).ready(function(){
     
     $('#item-list').hide();
     $('.itemss').on('click', function(){
-            
+            $("#achievement-list").empty();
         if($('#game-list').is(":visible")) {
             $('#item-list').show();
                 $('#game-list').slideUp();
