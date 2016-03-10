@@ -30,6 +30,9 @@ $(document).ready(function(){
             } else {
                 $("#achievement-list").append("<p>No achievements for this game :(</p>");
             }
+            $('html, body').animate({
+            scrollTop: $("#achievement-list").offset().top - 0
+        }, 900);
         });
     });
 
